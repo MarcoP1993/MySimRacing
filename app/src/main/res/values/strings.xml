@@ -14,5 +14,8 @@
     <string name="btn_registrarse">Registrarse</string>
     <string name="edt_email_registro">E-mail</string>
     <string name="has_olvidado_tu_clave_entra_aqui">¿Has olvidado tu clave? Entra aqui</string>
+    <string name="has_olvidado_tu_contrasena">¿Has olvidado tu contraseña?</string>
+    <string name="instrucciones_recuperar_cuenta">Introduce tu Email y te enviaremos las instrucciones para recuperar tu cuenta</string>
+    <string name="email_example_com">Email@example.com</string>
     <string name="todo">TODO</string>
 </resources>
