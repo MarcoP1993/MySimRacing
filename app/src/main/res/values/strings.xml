@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">MySimRacing</string>
+    <string name="e_mail_Inicio">E-mail</string>
+    <string name="password_inicio">Contraseña</string>
+    <string name="btn_acceder">Acceder</string>
+    <string name="txt_registrate">REGISTRATE</string>
+    <string name="aun_no_tienes_cuenta">¿Aun no tienes cuenta?</string>
+    <string name="logo">TODO</string>
+    <string name="txt_registro">Registro</string>
+    <string name="edt_e_mail">E-mail</string>
+    <string name="edt_nombre_registro">Nombre</string>
+    <string name="edt_apellido">Apellido</string>
+    <string name="edt_contrasena_registro">Contraseña</string>
+    <string name="btn_registrarse">Registrarse</string>
+    <string name="edt_email_registro">E-mail</string>
+    <string name="has_olvidado_tu_clave_entra_aqui">¿Has olvidado tu clave? Entra aqui</string>
+    <string name="todo">TODO</string>
+</resources>
