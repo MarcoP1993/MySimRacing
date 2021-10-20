@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "765637839694",
+    "project_id": "simracingmanagement",
+    "storage_bucket": "simracingmanagement.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:765637839694:android:82099c26ef0fc00ab92c1f",
+        "android_client_info": {
+          "package_name": "com.example.mysimracing"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "765637839694-e832douhfijj8tjdj7o6jpoa3qat7tnk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAo-Ts_rIuTQmZqVNm2W5_k6ND9lt66aqc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "765637839694-e832douhfijj8tjdj7o6jpoa3qat7tnk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
