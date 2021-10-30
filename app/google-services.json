@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "765637839694",
+    "firebase_url": "https://simracingmanagement-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "simracingmanagement",
     "storage_bucket": "simracingmanagement.appspot.com"
   },

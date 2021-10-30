@@ -44,7 +44,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/edt_apellido"
+        android:id="@+id/edt_Nickname"
         android:layout_width="0dp"
         android:layout_height="49dp"
         android:layout_marginTop="32dp"
@@ -76,12 +76,12 @@
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPassword"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPassword"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
+        app:layout_constraintEnd_toEndOf="@+id/edt_pass_registro"
+        app:layout_constraintStart_toStartOf="@+id/edt_pass_registro"
+        app:layout_constraintTop_toBottomOf="@+id/edt_pass_registro" />
 
     <EditText
-        android:id="@+id/editTextTextEmailAddress"
+        android:id="@+id/edt_email_registro"
         android:layout_width="0dp"
         android:layout_height="49dp"
         android:layout_marginTop="32dp"
@@ -96,11 +96,11 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/edt_nombre"
         app:layout_constraintStart_toStartOf="@+id/edt_nombre"
-        app:layout_constraintTop_toBottomOf="@+id/edt_apellido"
+        app:layout_constraintTop_toBottomOf="@+id/edt_Nickname"
         tools:ignore="TextContrastCheck" />
 
     <EditText
-        android:id="@+id/editTextTextPassword"
+        android:id="@+id/edt_pass_registro"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginTop="32dp"
@@ -115,7 +115,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/edt_nombre"
         app:layout_constraintStart_toStartOf="@+id/edt_nombre"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress"
+        app:layout_constraintTop_toBottomOf="@+id/edt_email_registro"
         tools:ignore="TextContrastCheck" />
 
     <ImageView
