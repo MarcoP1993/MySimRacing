@@ -18,4 +18,8 @@
     <string name="instrucciones_recuperar_cuenta">Introduce tu Email y te enviaremos las instrucciones para recuperar tu cuenta</string>
     <string name="email_example_com">Email@example.com</string>
     <string name="todo">TODO</string>
+    <string name="txt_nombre_usuario">Usuario</string>
+    <string name="nickname_usuario">NickName</string>
+    <string name="imagen_usuario">TODO</string>
+    <string name="fondo_usuario">TextView</string>
 </resources>
