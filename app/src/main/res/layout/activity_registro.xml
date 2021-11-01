@@ -71,7 +71,6 @@
         android:layout_marginTop="80dp"
         android:background="@color/design_default_color_error"
         android:fontFamily="@font/abeezee"
-        android:onClick="registrarse"
         android:text="@string/btn_registrarse"
         android:textColor="@color/white"
         android:textSize="16sp"

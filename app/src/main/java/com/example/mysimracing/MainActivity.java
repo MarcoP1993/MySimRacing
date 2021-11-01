@@ -26,10 +26,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        nombre_usuario = (TextView) findViewById(R.id.txt_nombre_usuario);
-        nickname_usuario = (TextView) findViewById(R.id.txt_nickname_usuario);
-        databaseReference = FirebaseDatabase.getInstance().getReference();
         firebaseAuth = FirebaseAuth.getInstance();
+
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+
+        nombre_usuario  = (TextView) findViewById(R.id.txt_nombre_usuario);
+        nickname_usuario = (TextView) findViewById(R.id.txt_nickname_usuario);
+
 
         recuperarInfoUsusario();
 

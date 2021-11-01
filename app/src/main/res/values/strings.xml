@@ -9,7 +9,7 @@
     <string name="txt_registro">Registro</string>
     <string name="edt_e_mail">E-mail</string>
     <string name="edt_nombre_registro">Nombre</string>
-    <string name="edt_apellido">Apellido</string>
+    <string name="edt_apellido">NickName</string>
     <string name="edt_contrasena_registro">Contraseña</string>
     <string name="btn_registrarse">Registrarse</string>
     <string name="edt_email_registro">E-mail</string>
@@ -18,8 +18,8 @@
     <string name="instrucciones_recuperar_cuenta">Introduce tu Email y te enviaremos las instrucciones para recuperar tu cuenta</string>
     <string name="email_example_com">Email@example.com</string>
     <string name="todo">TODO</string>
-    <string name="txt_nombre_usuario">Usuario</string>
-    <string name="nickname_usuario">NickName</string>
+    <string name="txt_nombre_usuario">Nombre Usuario</string>
+    <string name="nickname_usuario">Nickname</string>
     <string name="imagen_usuario">TODO</string>
     <string name="fondo_usuario">TextView</string>
 </resources>
