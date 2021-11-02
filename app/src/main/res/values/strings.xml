@@ -9,7 +9,7 @@
     <string name="txt_registro">Registro</string>
     <string name="edt_e_mail">E-mail</string>
     <string name="edt_nombre_registro">Nombre</string>
-    <string name="edt_apellido">NickName</string>
+    <string name="edt_nickname">Nickname</string>
     <string name="edt_contrasena_registro">Contraseña</string>
     <string name="btn_registrarse">Registrarse</string>
     <string name="edt_email_registro">E-mail</string>
