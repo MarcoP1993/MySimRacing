@@ -93,7 +93,7 @@ public class RegistroActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task2) {
                             if(task2.isSuccessful()){
-                                startActivity(new Intent(RegistroActivity.this, MainActivity.class));
+                                startActivity(new Intent(RegistroActivity.this, RoleActivity.class));
                                 finish();
                             }else{
                                 Toast.makeText(RegistroActivity.this, "No se pudo crear los datos en correctamente", Toast.LENGTH_LONG).show();

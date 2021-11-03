@@ -22,4 +22,10 @@
     <string name="nickname_usuario">Nickname</string>
     <string name="imagen_usuario">TODO</string>
     <string name="fondo_usuario">TextView</string>
+    <string name="txt_configuracion">Vamos a terminar de configurar tu perfil, para ello elige el Rol que vas a desempeñar en la App, tienes 3 opciones y podras cambiarlo mas adelante.</string>
+    <string name="txt_titulo_completa_tu_perfil">Completa tu perfil</string>
+    <string name="cb_piloto">Piloto</string>
+    <string name="cb_jefe_de_equipo">Jefe de Equipo</string>
+    <string name="cb_organizador">Organizador</string>
+    <string name="btn_aceptar_perfil">Aceptar</string>
 </resources>

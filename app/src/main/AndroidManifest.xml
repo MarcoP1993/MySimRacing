@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
         <activity
+            android:name=".RoleActivity"
+            android:exported="false" />
+        <activity
             android:name=".RecuperarClaveActivity"
             android:exported="true" />
         <activity
