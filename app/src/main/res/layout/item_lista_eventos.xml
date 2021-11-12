@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:background="@drawable/degradados">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="142dp"
+        android:layout_height="160dp"
+        android:layout_marginEnd="10dp"
+        app:srcCompat="@drawable/logo2" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="162dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txt_campeonato"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="Campeonato"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txt_ciudad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="Ciudad"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txt_plataforma"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="Plataforma"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txt_empezado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="Compitiendo"
+            android:textColor="@color/black"
+            android:textStyle="bold|italic" />
+    </LinearLayout>
+</LinearLayout>
