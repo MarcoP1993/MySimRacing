@@ -19,16 +19,18 @@ Los campeonatos tendran las siguientes opciones:
 	- Salas, aqui se podrá ver con quien vas a correr en las distintas salas.
 
 	- Calendario, aqui se podrá ver lo siguiente:
-		- Circuitos
-		- Horarios de las carreras
+		- Circuitos, tendrá la siguiente informacion:
+			- Foto
+			- Nombre
+			- Categoria (Gr.1, Gr.2, N600...)
+			- Horarios de las carreras
 		- Fecha de la competicion (inicio/final)
 		- Tipo de campeonato (individual o por equipos)
-		- Categoria (Gr.1, Gr.2, N600...)
 		- Plataforma (PlayStation, XBOX o PC)
 
 	- Equipos participantes
 
-El rol de Jefe de equipo va a poder crear equipos asi como añadir piotos a estos e inscribirlo a un campeonato.
+El rol de Jefe de equipo va a poder crear equipos asi como añadir pilotos a estos e inscribirlo a un campeonato.
 Tendrá las siguientes opciones:
 	
 	- Crear/Modificar/Eliminar equipos
