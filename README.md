@@ -39,3 +39,11 @@ Tendrá las siguientes opciones:
 
 El rol de Piloto va a poder crear su perfil y modificarlo, tambien podrá solicitar entrar a un equipo o participar en
 un campeonato individual.
+
+Bocetos de cada Rol:
+
+-Organizador:
+
+-Jefe Equipo:
+
+-Piloto:
