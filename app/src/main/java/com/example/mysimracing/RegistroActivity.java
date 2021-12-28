@@ -36,7 +36,6 @@ public class RegistroActivity extends AppCompatActivity {
 
     private String idUsuario;
     private Button btn_registro;
-    private ProgressBar progressBar;
 
     private  FirebaseAuth firebaseAuth;
     private FirebaseFirestore firestoredb;
@@ -46,6 +45,7 @@ public class RegistroActivity extends AppCompatActivity {
     private String nickname = "";
     private String correo = "";
     private String contraseña = "";
+    private String role = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +57,6 @@ public class RegistroActivity extends AppCompatActivity {
         txt_correo = (EditText) findViewById(R.id.edt_email_registro);
         txt_password = (EditText) findViewById(R.id.edt_pass_registro);
         btn_registro = (Button) findViewById(R.id.btn_registrarse);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         firebaseAuth = FirebaseAuth.getInstance();
         firestoredb = FirebaseFirestore.getInstance();
@@ -65,10 +64,10 @@ public class RegistroActivity extends AppCompatActivity {
         btn_registro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                nombre = txt_nombre.getText().toString().trim();
-                nickname = txt_nickname.getText().toString().trim();
-                correo = txt_correo.getText().toString().trim();
-                contraseña = txt_password.getText().toString().trim();
+                nombre = txt_nombre.getText().toString();
+                nickname = txt_nickname.getText().toString();
+                correo = txt_correo.getText().toString();
+                contraseña = txt_password.getText().toString();
 
                 if(!nombre.isEmpty() && !nickname.isEmpty() && !correo.isEmpty() && !contraseña.isEmpty()){
 
@@ -103,14 +102,15 @@ public class RegistroActivity extends AppCompatActivity {
                     user.put("Nickname", nickname);
                     user.put("Email", correo);
                     user.put("Contraseña", contraseña);
-
+                    user.put("Role", role);
                     documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
                             Log.d(TAG,"Perfil del usuario creado " + idUsuario);
                         }
                     });
-                    startActivity(new Intent(RegistroActivity.this, RoleActivity.class));
+                    startActivity(new Intent(RegistroActivity.this, MainActivity.class));
+                    finish();
                     /*mDatabaseReference.child("Usuarios").child(id).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task2) {
@@ -125,7 +125,7 @@ public class RegistroActivity extends AppCompatActivity {
                     });*/
 
                 }else {
-                    Toast.makeText(RegistroActivity.this, "No se ha podido crear al usuario", Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegistroActivity.this, "El usuario ya existe, intentalo con otro correo", Toast.LENGTH_LONG).show();
 
                 }
             }

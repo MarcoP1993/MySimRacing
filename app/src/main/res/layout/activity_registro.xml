@@ -11,25 +11,28 @@
         android:id="@+id/txt_registro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
-        android:fontFamily="@font/sonsie_one"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/aldrich"
         android:text="@string/txt_registro"
         android:textColor="@color/white"
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TextContrastCheck" />
 
     <EditText
         android:id="@+id/edt_nombre"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="156dp"
+        android:layout_marginTop="116dp"
         android:layout_marginEnd="24dp"
-        android:background="@android:drawable/gallery_thumb"
+        android:background="@android:drawable/editbox_dropdown_dark_frame"
         android:ems="10"
+        android:fontFamily="@font/aldrich"
         android:hint="@string/edt_nombre_registro"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
@@ -48,8 +51,9 @@
         android:layout_width="0dp"
         android:layout_height="49dp"
         android:layout_marginTop="32dp"
-        android:background="@android:drawable/gallery_thumb"
+        android:background="@android:drawable/editbox_dropdown_dark_frame"
         android:ems="10"
+        android:fontFamily="@font/aldrich"
         android:hint="@string/edt_nickname"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
@@ -68,7 +72,7 @@
         android:id="@+id/btn_registrarse"
         android:layout_width="167dp"
         android:layout_height="48dp"
-        android:layout_marginTop="88dp"
+        android:layout_marginTop="208dp"
         android:background="@color/design_default_color_error"
         android:fontFamily="@font/abeezee"
         android:text="@string/btn_registrarse"
@@ -84,8 +88,9 @@
         android:layout_width="0dp"
         android:layout_height="49dp"
         android:layout_marginTop="32dp"
-        android:background="@android:drawable/gallery_thumb"
+        android:background="@android:drawable/editbox_dropdown_dark_frame"
         android:ems="10"
+        android:fontFamily="@font/aldrich"
         android:hint="@string/edt_email_registro"
         android:importantForAutofill="no"
         android:inputType="textEmailAddress"
@@ -103,8 +108,9 @@
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginTop="32dp"
-        android:background="@android:drawable/gallery_thumb"
+        android:background="@android:drawable/editbox_dropdown_dark_frame"
         android:ems="10"
+        android:fontFamily="@font/aldrich"
         android:hint="@string/edt_contrasena_registro"
         android:importantForAutofill="no"
         android:inputType="textPassword"
@@ -117,30 +123,79 @@
         app:layout_constraintTop_toBottomOf="@+id/edt_email_registro"
         tools:ignore="TextContrastCheck" />
 
+    <RadioGroup
+        android:id="@+id/radio_group_roles"
+        android:layout_width="0dp"
+        android:layout_height="107dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="30dp"
+        android:background="@android:drawable/editbox_dropdown_dark_frame"
+        app:layout_constraintBottom_toTopOf="@+id/btn_registrarse"
+        app:layout_constraintEnd_toEndOf="@+id/txt_roles"
+        app:layout_constraintStart_toStartOf="@+id/txt_roles"
+        app:layout_constraintTop_toBottomOf="@+id/txt_roles">
+
+        <RadioButton
+            android:id="@+id/Rb_organizador"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/aldrich"
+            android:text="🏁 Organizador"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <RadioButton
+            android:id="@+id/Rb_jefe_equipo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/aldrich"
+            android:text="👨🏼‍🔧 Jefe de Equipo"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <RadioButton
+            android:id="@+id/Rb_piloto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/aldrich"
+            android:text="🏎 ️Piloto"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:ignore="TouchTargetSizeCheck" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/txt_roles"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/aldrich"
+        android:text="Elige uno de los siguientes roles, podrás cambiarlo mas adelante:"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/edt_pass_registro"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/edt_pass_registro"
+        app:layout_constraintTop_toBottomOf="@+id/edt_pass_registro" />
+
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="472dp"
-        android:layout_height="292dp"
-        android:contentDescription="@string/todo"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="411dp"
+        android:layout_height="304dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/disenocuatro"
-        tools:ignore="ImageContrastCheck" />
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="59dp"
-        android:layout_height="55dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/ic_launcher_foreground"
-        android:backgroundTint="@color/white"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/btn_registrarse"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/radio_group_roles"
+        app:srcCompat="@drawable/disenocuatro" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

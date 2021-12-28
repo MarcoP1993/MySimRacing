@@ -12,10 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
         <activity
-            android:name=".EventoDetallesActivity"
+            android:name=".ActivityPiloto"
             android:exported="false" />
         <activity
-            android:name=".RoleActivity"
+            android:name=".ActivityJefeEquipo"
+            android:exported="false" />
+        <activity
+            android:name=".EventoDetallesActivity"
             android:exported="false" />
         <activity
             android:name=".RecuperarClaveActivity"

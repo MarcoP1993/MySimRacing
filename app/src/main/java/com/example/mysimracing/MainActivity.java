@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         helper.attachToRecyclerView(rv_eventos);
     }
 
-    public void mostrarEstudiante(EventosTorneo e) {
+    public void mostrarEventos(EventosTorneo e) {
         Toast.makeText(this,"Nombre -> " + e.getNombreTorneo() + "\n" + "Ciudad -> "+ e.getCiudad() + "\n"+ "Plataforma -> " + e.getPlataforma() + "\n" + "Empezado -> " + e.getCompitiendo(), Toast.LENGTH_LONG).show();
     }
 
