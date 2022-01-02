@@ -4,89 +4,195 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/img"
-    tools:context=".EventoDetallesActivity">
-
-    <TextView
-        android:id="@+id/txt_titulo_detalle_evento"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        android:background="@drawable/degradados"
-        android:text="Detalle Evento"
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.435"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/txt_nombre_detalle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="104dp"
-        android:text="Nombre Competicion"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.124"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_titulo_detalle_evento" />
-
-    <TextView
-        android:id="@+id/txt_ciudad_detalle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="Ciudad Campeonato"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.12"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_nombre_detalle" />
-
-    <TextView
-        android:id="@+id/txt_plataforma_detalle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="Plataforma"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.096"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_ciudad_detalle" />
-
-    <TextView
-        android:id="@+id/txt_competicion_empezada"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="38dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="315dp"
-        android:text="Competicion Empezada"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.053"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_plataforma_detalle" />
+    android:background="@drawable/fondoperfil"
+    tools:context=".RecicledListas.EventoDetallesActivity">
 
     <Button
         android:id="@+id/btn_cerrar"
-        android:layout_width="71dp"
-        android:layout_height="66dp"
+        android:layout_width="54dp"
+        android:layout_height="53dp"
         android:layout_marginTop="16dp"
-        android:background="@drawable/delete_cruz"
+        android:background="@drawable/atras"
         android:onClick="cerrarVentana"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.952"
+        app:layout_constraintHorizontal_bias="0.915"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="110dp"
+        android:layout_height="115dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="84dp"
+        android:layout_marginEnd="285dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.437"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo_campeonato" />
+
+    <TextView
+        android:id="@+id/txt_nombre_campeonato"
+        android:layout_width="213dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="84dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/aldrich"
+        android:text="Nombre Campeonato"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/imageView8"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txt_fecha_inicio"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/aldrich"
+        android:text="Fecha inicio"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/imageView8"
+        app:layout_constraintTop_toBottomOf="@+id/txt_nombre_campeonato" />
+
+    <Button
+        android:id="@+id/btn_normativa"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="50dp"
+        android:background="@android:drawable/progress_horizontal"
+        android:backgroundTint="@android:color/holo_red_light"
+        android:fontFamily="@font/audiowide"
+        android:text="Normativa"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView8"
+        tools:ignore="TextContrastCheck" />
+
+    <Button
+        android:id="@+id/btn_inscripcion"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="80dp"
+        android:background="@android:drawable/progress_horizontal"
+        android:backgroundTint="@android:color/holo_red_light"
+        android:fontFamily="@font/audiowide"
+        android:text="Inscripciones"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/btn_normativa"
+        app:layout_constraintTop_toTopOf="@+id/btn_normativa"
+        tools:ignore="TextContrastCheck" />
+
+    <Button
+        android:id="@+id/btn_sanciones"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="32dp"
+        android:background="@android:drawable/progress_horizontal"
+        android:backgroundTint="@android:color/holo_red_light"
+        android:fontFamily="@font/audiowide"
+        android:text="Sanciones"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_normativa"
+        tools:ignore="TextContrastCheck" />
+
+    <Button
+        android:id="@+id/btn_clasificacion"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="80dp"
+        android:background="@android:drawable/progress_horizontal"
+        android:backgroundTint="@android:color/holo_red_light"
+        android:fontFamily="@font/audiowide"
+        android:text="Clasificacion"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.967"
+        app:layout_constraintStart_toEndOf="@+id/btn_sanciones"
+        app:layout_constraintTop_toBottomOf="@+id/btn_inscripcion"
+        tools:ignore="TextContrastCheck" />
+
+    <Button
+        android:id="@+id/btn_salas"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="32dp"
+        android:background="@android:drawable/progress_horizontal"
+        android:backgroundTint="@android:color/holo_red_light"
+        android:fontFamily="@font/audiowide"
+        android:text="Salas"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_sanciones"
+        tools:ignore="TextContrastCheck" />
+
+    <Button
+        android:id="@+id/btn_calendario"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="80dp"
+        android:background="@android:drawable/progress_horizontal"
+        android:backgroundTint="@android:color/holo_red_light"
+        android:fontFamily="@font/audiowide"
+        android:text="Calendario"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.962"
+        app:layout_constraintStart_toEndOf="@+id/btn_salas"
+        app:layout_constraintTop_toBottomOf="@+id/btn_clasificacion" />
+
+    <Button
+        android:id="@+id/btn_equipo_piloto"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="32dp"
+        android:background="@android:drawable/progress_horizontal"
+        android:backgroundTint="@android:color/holo_red_light"
+        android:fontFamily="@font/audiowide"
+        android:text="Equipos/Pilotos"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_salas" />
+
+    <Button
+        android:id="@+id/btn_config"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="80dp"
+        android:background="@android:drawable/progress_horizontal"
+        android:backgroundTint="@android:color/holo_orange_light"
+        android:fontFamily="@font/audiowide"
+        android:text="Configuracion"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/btn_equipo_piloto"
+        app:layout_constraintTop_toBottomOf="@+id/btn_calendario" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

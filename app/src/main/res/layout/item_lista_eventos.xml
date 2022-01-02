@@ -4,18 +4,27 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="5dp"
-    android:background="@drawable/degradados">
+    android:background="@drawable/degradados"
+    android:paddingBottom="4dp">
 
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="142dp"
         android:layout_height="160dp"
         android:layout_marginEnd="10dp"
-        app:srcCompat="@drawable/logo2" />
+        app:srcCompat="@drawable/logo_campeonato" />
+
+    <View
+        android:id="@+id/divider5"
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:layout_marginRight="5dp"
+        android:background="@color/design_default_color_error" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="162dp"
+        android:layout_marginLeft="5dp"
         android:orientation="vertical">
 
         <TextView
@@ -23,18 +32,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="@font/audiowide"
             android:gravity="center_vertical"
             android:text="Campeonato"
             android:textColor="@color/black"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/txt_ciudad"
+            android:id="@+id/txt_juego"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="@font/audiowide"
             android:gravity="center_vertical"
-            android:text="Ciudad"
+            android:text="Juego"
             android:textColor="@color/black"
             android:textStyle="bold" />
 
@@ -43,6 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="@font/audiowide"
             android:gravity="center_vertical"
             android:text="Plataforma"
             android:textColor="@color/black"
@@ -53,9 +65,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="@font/audiowide"
             android:gravity="center_vertical"
             android:text="Compitiendo"
             android:textColor="@color/black"
             android:textStyle="bold|italic" />
+
     </LinearLayout>
 </LinearLayout>

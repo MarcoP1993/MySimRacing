@@ -1,4 +1,4 @@
-package com.example.mysimracing;
+package com.example.mysimracing.RecicledListas;
 
 import android.content.Intent;
 import android.view.View;
@@ -7,6 +7,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.mysimracing.R;
 
 public class EventoViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
@@ -23,7 +25,7 @@ public class EventoViewHolder extends RecyclerView.ViewHolder implements View.On
         super(itemView);
         img_foto = (ImageView) itemView.findViewById(R.id.imageView2);
         txt_competicion = (TextView) itemView.findViewById(R.id.txt_campeonato);
-        txt_ciudad = (TextView) itemView.findViewById(R.id.txt_ciudad);
+        txt_ciudad = (TextView) itemView.findViewById(R.id.txt_juego);
         txt_plataforma = (TextView) itemView.findViewById(R.id.txt_plataforma);
         txt_empezado = (TextView) itemView.findViewById(R.id.txt_empezado);
         this.le_adapter = le_adapter;
