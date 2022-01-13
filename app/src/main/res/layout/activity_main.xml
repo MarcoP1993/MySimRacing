@@ -15,7 +15,6 @@
         android:background="@android:drawable/alert_dark_frame"
         android:backgroundTint="@android:color/holo_red_dark"
         android:rotation="9"
-        android:text="@string/fondo_usuario"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.505"

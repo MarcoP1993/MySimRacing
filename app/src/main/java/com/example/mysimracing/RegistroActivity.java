@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -33,6 +35,10 @@ public class RegistroActivity extends AppCompatActivity {
     private EditText txt_nickname = null;
     private EditText txt_correo = null;
     private EditText txt_password = null;
+    private RadioGroup rg_roles = null;
+    private RadioButton rb_organizador;
+    private RadioButton rb_jefe_equipo;
+    private RadioButton rb_piloto;
 
     private String idUsuario;
     private Button btn_registro;
@@ -57,6 +63,11 @@ public class RegistroActivity extends AppCompatActivity {
         txt_correo = (EditText) findViewById(R.id.edt_email_registro);
         txt_password = (EditText) findViewById(R.id.edt_pass_registro);
         btn_registro = (Button) findViewById(R.id.btn_registrarse);
+        rg_roles = (RadioGroup) findViewById(R.id.radio_group_roles);
+        rb_organizador = (RadioButton) findViewById(R.id.Rb_organizador);
+        rb_jefe_equipo = (RadioButton) findViewById(R.id.Rb_jefe_equipo);
+        rb_piloto = (RadioButton) findViewById(R.id.Rb_piloto);
+
 
         firebaseAuth = FirebaseAuth.getInstance();
         firestoredb = FirebaseFirestore.getInstance();
@@ -68,16 +79,18 @@ public class RegistroActivity extends AppCompatActivity {
                 nickname = txt_nickname.getText().toString();
                 correo = txt_correo.getText().toString();
                 contraseña = txt_password.getText().toString();
+                role = "";
 
-                if(!nombre.isEmpty() && !nickname.isEmpty() && !correo.isEmpty() && !contraseña.isEmpty()){
+                if(!nombre.isEmpty() && !nickname.isEmpty() && !correo.isEmpty() && !contraseña.isEmpty() && role.isEmpty()){
 
                     if(contraseña.length() >= 6) {
-
+                        elegirRole();
                         registrarse();
 
                     }else {
                         Toast.makeText(RegistroActivity.this, "La contraseña debe tener minimo 6 caracteres", Toast.LENGTH_LONG).show();
                     }
+
                 }else{
                     Toast.makeText(RegistroActivity.this, "Debe rellenar todos los campos", Toast.LENGTH_LONG).show();
                 }
@@ -109,7 +122,7 @@ public class RegistroActivity extends AppCompatActivity {
                             Log.d(TAG,"Perfil del usuario creado " + idUsuario);
                         }
                     });
-                    startActivity(new Intent(RegistroActivity.this, MainActivity.class));
+
                     finish();
                     /*mDatabaseReference.child("Usuarios").child(id).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
@@ -132,5 +145,59 @@ public class RegistroActivity extends AppCompatActivity {
         });
     }
 
+    public void elegirRole (){
+        int seleccionadoOk = rg_roles.getCheckedRadioButtonId();
 
-}
+        if(seleccionadoOk == R.id.Rb_organizador){
+
+            role = "Organizador";
+            Toast.makeText(this,"Has seleccionado Organizador",Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(RegistroActivity.this, OrganizadorActivity.class));
+
+        }else if(seleccionadoOk == R.id.Rb_jefe_equipo){
+
+            role = "Jefe de Equipo";
+            Toast.makeText(this,"Has seleccionado Jefe de equipo",Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(RegistroActivity.this, ActivityJefeEquipo.class));
+
+        }else if (seleccionadoOk == R.id.Rb_piloto){
+
+            role = "Piloto";
+            Toast.makeText(this,"Has seleccionado Piloto",Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(RegistroActivity.this, ActivityPiloto.class));
+
+        }else {
+            Toast.makeText(RegistroActivity.this, "Selecciona un rol", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        }
+    }
+
+    /*private void elegirRole(View view) {
+        boolean seleccionadoOk = ((RadioButton)view).isChecked(); //asi se ve si esta seleccionado una opcion.
+        switch (view.getId())
+        {
+            case R.id.Rb_organizador:
+                if (seleccionadoOk){
+                    Toast.makeText(this,"Has seleccionado Organizador",Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(RegistroActivity.this, OrganizadorActivity.class));
+                }
+                break;
+            case R.id.Rb_jefe_equipo:
+                if (seleccionadoOk){
+                    Toast.makeText(this,"Has seleccionado Jefe de equipo",Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(RegistroActivity.this, ActivityJefeEquipo.class));
+                }
+                break;
+
+            case R.id.Rb_piloto:
+                if (seleccionadoOk){
+                    Toast.makeText(this,"Has seleccionado Piloto",Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(RegistroActivity.this, ActivityPiloto.class));
+                }
+                break;
+        }
+    }*/
+
+

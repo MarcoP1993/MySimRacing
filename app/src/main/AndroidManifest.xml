@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
         <activity
+            android:name=".NormativaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ActivityNuevoCampeonato"
+            android:exported="false" />
+        <activity
             android:name=".OrganizadorActivity"
             android:exported="false" />
         <activity
