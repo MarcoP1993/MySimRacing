@@ -15,6 +15,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.example.mysimracing.Clases.Usuarios;
+import com.example.mysimracing.RecicledListas.EventosTorneo;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -43,7 +45,7 @@ public class RegistroActivity extends AppCompatActivity {
     private String idUsuario;
     private Button btn_registro;
 
-    private  FirebaseAuth firebaseAuth;
+    private FirebaseAuth firebaseAuth;
     private FirebaseFirestore firestoredb;
 
     //Variables de los datos a regitrar
@@ -109,14 +111,16 @@ public class RegistroActivity extends AppCompatActivity {
                     idUsuario = firebaseAuth.getCurrentUser().getUid();
                     DocumentReference documentReference = firestoredb.collection("Usuarios").document(idUsuario);
 
+                    Usuarios usuarios = new Usuarios(nombre,nickname,correo, contraseña, role);
+                    //EventosTorneo eventos = new EventosTorneo("nombre 1", "seseña", "ps4", false);
                     //creamos un mapa de valores
-                    Map<String, Object> user = new HashMap<>();
+                    /*Map<String, Object> user = new HashMap<>();
                     user.put("Nombre", nombre);
                     user.put("Nickname", nickname);
                     user.put("Email", correo);
                     user.put("Contraseña", contraseña);
-                    user.put("Role", role);
-                    documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    user.put("Role", role);*/
+                    documentReference.set(usuarios).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
                             Log.d(TAG,"Perfil del usuario creado " + idUsuario);

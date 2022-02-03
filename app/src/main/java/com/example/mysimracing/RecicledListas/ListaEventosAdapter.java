@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.mysimracing.Clases.Campeonatos;
 import com.example.mysimracing.R;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 public class ListaEventosAdapter extends RecyclerView.Adapter<EventoViewHolder> {
     //atributos
     private Context c = null;
-    private ArrayList<EventosTorneo> eventos;
+    private ArrayList<Campeonatos> campeonatos;
     private LayoutInflater le_inflater;
 
     public Context getC() {
@@ -26,17 +27,17 @@ public class ListaEventosAdapter extends RecyclerView.Adapter<EventoViewHolder> 
         this.c = c;
     }
 
-    public ArrayList<EventosTorneo> getEventos() {
-        return eventos;
+    public ArrayList<Campeonatos> getCampeonatos() {
+        return campeonatos;
     }
 
-    public void setEventos(ArrayList<EventosTorneo> eventos) {
-        this.eventos = eventos;
+    public void setEventos(ArrayList<Campeonatos> campeonatos) {
+        this.campeonatos = campeonatos;
     }
 
-    public ListaEventosAdapter(Context context, ArrayList<EventosTorneo> eventos) {
+    public ListaEventosAdapter(Context context, ArrayList<Campeonatos> campeonatos) {
         this.c = context;
-        this.eventos = eventos;
+        this.campeonatos = campeonatos;
         le_inflater = LayoutInflater.from(c);
     }
 
@@ -50,16 +51,16 @@ public class ListaEventosAdapter extends RecyclerView.Adapter<EventoViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull EventoViewHolder holder, int position) {
-        EventosTorneo eventoSeleccionado = eventos.get(position);
-        holder.txt_competicion.setText("Nombre Competicion: " + eventoSeleccionado.getNombreTorneo());
-        holder.txt_ciudad.setText("Ciudad Competicion: " + eventoSeleccionado.getCiudad());
-        holder.txt_plataforma.setText("Plataforma: " + eventoSeleccionado.getPlataforma());
-        holder.txt_empezado.setText("Competicion empezada: " + eventoSeleccionado.getCompitiendo());
+        Campeonatos campeonatoSeleccionado = campeonatos.get(position);
+        holder.txt_competicion.setText("Nombre Competicion: " + campeonatoSeleccionado.getNombreCampeonato());
+        holder.txt_juego.setText("Videojuego: " + campeonatoSeleccionado.getJuego());
+        holder.txt_plataforma.setText("Plataforma: " + campeonatoSeleccionado.getPlataforma());
+        holder.txt_fechas.setText("Fecha Competicion: " + campeonatoSeleccionado.getRango_fechas());
 
     }
 
     @Override
     public int getItemCount() {
-        return eventos.size();
+        return campeonatos.size();
     }
 }

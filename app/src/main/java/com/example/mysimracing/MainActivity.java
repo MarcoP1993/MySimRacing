@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         eventos.add(new EventosTorneo("Torneo 7", "Seseña", "XBOX", false));
         eventos.add(new EventosTorneo("Torneo 8", "Seseña", "PC", true));
 
-        adaptadorEventos = new ListaEventosAdapter(this,eventos);
+        //adaptadorEventos = new ListaEventosAdapter(this,eventos);
         rv_eventos.setAdapter(adaptadorEventos);
         rv_eventos.setLayoutManager(new LinearLayoutManager(this));
 

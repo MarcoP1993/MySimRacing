@@ -25,6 +25,10 @@
     <string name="jefe_de_equipo">👨🏼‍🔧 Jefe de Equipo</string>
     <string name="piloto">🏎 ️Piloto</string>
     <string name="elige_uno_de_los_siguientes_roles_podr_s_cambiarlo_mas_adelante">Elige uno de los siguientes roles, podrás cambiarlo mas adelante:</string>
-
+    <string name="perfil_menu">Perfil</string>
+    <string name="cerrar_sesion_menu">Cerrar Sesion</string>
+    <string name="info_menu">Información</string>
+    <string name="individual">Individual</string>
+    <string name="equipos">Equipos</string>
 
 </resources>

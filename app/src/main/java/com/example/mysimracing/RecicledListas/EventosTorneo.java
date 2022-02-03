@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class EventosTorneo implements Serializable {
+    private int idCampeonato;
     private String nombreTorneo;
     private String ciudad;
     private String plataforma;

@@ -10,11 +10,12 @@
         <entry key="..\:/Users/Perea/AndroidStudioProjects/MySimRacing2/app/src/main/res/drawable/splash.xml" value="0.2703125" />
         <entry key="..\:/Users/Perea/AndroidStudioProjects/MySimRacing2/app/src/main/res/font/aladin.xml" value="0.16041666666666668" />
         <entry key="..\:/Users/Perea/AndroidStudioProjects/MySimRacing2/app/src/main/res/layout/activity_evento_detalles.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Perea/AndroidStudioProjects/MySimRacing2/app/src/main/res/layout/activity_inscripciones.xml" value="0.25" />
         <entry key="..\:/Users/Perea/AndroidStudioProjects/MySimRacing2/app/src/main/res/layout/activity_jefe_equipo.xml" value="0.25" />
         <entry key="..\:/Users/Perea/AndroidStudioProjects/MySimRacing2/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/Users/Perea/AndroidStudioProjects/MySimRacing2/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/Perea/AndroidStudioProjects/MySimRacing2/app/src/main/res/layout/activity_normativa.xml" value="0.25" />
-        <entry key="..\:/Users/Perea/AndroidStudioProjects/MySimRacing2/app/src/main/res/layout/activity_nuevo_campeonato.xml" value="0.25" />
+        <entry key="..\:/Users/Perea/AndroidStudioProjects/MySimRacing2/app/src/main/res/layout/activity_nuevo_campeonato.xml" value="0.264" />
         <entry key="..\:/Users/Perea/AndroidStudioProjects/MySimRacing2/app/src/main/res/layout/activity_organizador.xml" value="0.25" />
         <entry key="..\:/Users/Perea/AndroidStudioProjects/MySimRacing2/app/src/main/res/layout/activity_piloto.xml" value="0.25" />
         <entry key="..\:/Users/Perea/AndroidStudioProjects/MySimRacing2/app/src/main/res/layout/activity_recuperar_clave.xml" value="0.25416666666666665" />
@@ -24,6 +25,7 @@
         <entry key="..\:/Users/Perea/AndroidStudioProjects/MySimRacing2/app/src/main/res/layout/fragment_second.xml" value="0.25" />
         <entry key="..\:/Users/Perea/AndroidStudioProjects/MySimRacing2/app/src/main/res/layout/item_lista_campeonatos.xml" value="0.25" />
         <entry key="..\:/Users/Perea/AndroidStudioProjects/MySimRacing2/app/src/main/res/layout/item_lista_eventos.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Perea/AndroidStudioProjects/MySimRacing2/app/src/main/res/menu/menu_principal.xml" value="0.25" />
         <entry key="..\:/Users/Perea/AndroidStudioProjects/MySimRacing2/app/src/main/res/mipmap-anydpi-v26/ic_launcher_tux.xml" value="0.2703125" />
       </map>
     </option>

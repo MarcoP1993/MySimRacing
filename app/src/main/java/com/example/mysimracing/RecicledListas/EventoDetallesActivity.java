@@ -47,6 +47,13 @@ public class EventoDetallesActivity extends AppCompatActivity {
             }
         });
 
+        btn_inscripcion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(EventoDetallesActivity.this, InscripcionesActivity.class));
+            }
+        });
+
 
     }
 

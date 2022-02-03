@@ -11,11 +11,23 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.mysimracing.Clases.Usuarios;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -69,12 +81,59 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void acceso() {
-           firebaseAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+
+        FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
+        CollectionReference usersRef = rootRef.collection("Usuarios");
+        Query query = usersRef.whereEqualTo("Email", email);
+        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        String email = document.getString("Email");
+                        String password = document.getString("Contraseña");
+                        firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                usersRef.document(uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DocumentSnapshot> task2) {
+                                        if (task2.isSuccessful()) {
+                                            DocumentSnapshot document = task2.getResult();
+                                            if (document.exists()) {
+                                                String role = document.getString("Role");
+                                                if(role.equals("Organizador")) {
+                                                    startActivity(new Intent(LoginActivity.this, OrganizadorActivity.class));
+                                                    Toast.makeText(LoginActivity.this, "Bienvenido Organizador", Toast.LENGTH_SHORT).show();
+                                                    finish();
+
+                                                } else if (role.equals("Jefe de Equipo")) {
+                                                    startActivity(new Intent(LoginActivity.this, ActivityJefeEquipo.class));
+                                                    Toast.makeText(LoginActivity.this, "Bienvenido Jefe", Toast.LENGTH_SHORT).show();
+                                                    finish();
+
+                                                } else if (role.equals("Piloto")){
+                                                    startActivity(new Intent(LoginActivity.this, ActivityPiloto.class));
+                                                    Toast.makeText(LoginActivity.this, "Bienvenido Piloto", Toast.LENGTH_SHORT).show();
+                                                    finish();
+                                                }
+                                            }
+                                        }
+                                    }
+                                });
+                            }
+                        });
+                    }
+                }
+            }
+        });
+           /*firebaseAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                @Override
                public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
-
                         startActivity(new Intent(LoginActivity.this, MainActivity.class));
+
 
 
                     }else {
@@ -82,7 +141,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
 
                }
-           });
+           });*/
     }
 
     public void RecuperarClave(View view) {

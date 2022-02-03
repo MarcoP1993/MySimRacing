@@ -13,6 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
         android:fontFamily="@font/audiowide"
+        android:minHeight="48dp"
+        android:onClick="Seleccionarfecha"
         android:text="Nuevo Campeonato"
         android:textColor="@color/black"
         android:textSize="24sp"
@@ -22,7 +24,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/edt_nomCampeonatonuevo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -38,21 +40,21 @@
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName3"
+        android:id="@+id/edt_juegoCampeonato"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="4dp"
         android:ems="10"
         android:hint="Juego"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName7"
+        app:layout_constraintEnd_toEndOf="@+id/txt_rangoFechas"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName7"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName7" />
+        app:layout_constraintStart_toStartOf="@+id/txt_rangoFechas"
+        app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName4"
+        android:id="@+id/edt_platCampeonato"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -60,13 +62,13 @@
         android:hint="Plataforma"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName3"
+        app:layout_constraintEnd_toEndOf="@+id/edt_juegoCampeonato"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName3"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3" />
+        app:layout_constraintStart_toStartOf="@+id/edt_juegoCampeonato"
+        app:layout_constraintTop_toBottomOf="@+id/edt_juegoCampeonato" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName5"
+        android:id="@+id/edt_tipoCampeonato"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="52dp"
@@ -74,10 +76,10 @@
         android:hint="Individual/Equipos"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName4"
+        app:layout_constraintEnd_toEndOf="@+id/edt_platCampeonato"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName4"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName4" />
+        app:layout_constraintStart_toStartOf="@+id/edt_platCampeonato"
+        app:layout_constraintTop_toBottomOf="@+id/edt_platCampeonato" />
 
     <TextView
         android:id="@+id/textView12"
@@ -88,10 +90,10 @@
         android:text="Fecha Inicio/Fin:"
         android:textColor="@color/black"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName2"
+        app:layout_constraintEnd_toEndOf="@+id/edt_nomCampeonatonuevo"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName2"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
+        app:layout_constraintStart_toStartOf="@+id/edt_nomCampeonatonuevo"
+        app:layout_constraintTop_toBottomOf="@+id/edt_nomCampeonatonuevo" />
 
     <TextView
         android:id="@+id/textView13"
@@ -102,10 +104,10 @@
         android:text="Juego y Plataforma:"
         android:textColor="@color/black"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName7"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName7"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName7" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.119"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_fechaCampeonato" />
 
     <TextView
         android:id="@+id/textView14"
@@ -116,10 +118,10 @@
         android:text="Tipo de Campeonato:"
         android:textColor="@color/black"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName4"
+        app:layout_constraintEnd_toEndOf="@+id/edt_platCampeonato"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName4"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName4" />
+        app:layout_constraintStart_toStartOf="@+id/edt_platCampeonato"
+        app:layout_constraintTop_toBottomOf="@+id/edt_platCampeonato" />
 
     <TextView
         android:id="@+id/textView15"
@@ -130,51 +132,58 @@
         android:text="Nombre del Campeonato:"
         android:textColor="@color/black"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName2"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName2"
+        app:layout_constraintBottom_toTopOf="@+id/edt_nomCampeonatonuevo"
+        app:layout_constraintEnd_toEndOf="@+id/edt_nomCampeonatonuevo"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName2" />
+        app:layout_constraintStart_toStartOf="@+id/edt_nomCampeonatonuevo" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_crearCampeonato"
         android:layout_width="164dp"
         android:layout_height="52dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="32dp"
         android:background="@android:drawable/dialog_holo_light_frame"
         android:backgroundTint="@android:color/holo_green_light"
         android:fontFamily="@font/audiowide"
         android:text="Crear"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/edt_tipoCampeonato"
+        app:layout_constraintStart_toStartOf="@+id/edt_tipoCampeonato"
+        app:layout_constraintTop_toBottomOf="@+id/edt_tipoCampeonato" />
+
+    <TextView
+        android:id="@+id/txt_rangoFechas"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="4dp"
+        android:background="@android:drawable/divider_horizontal_dim_dark"
+        android:backgroundTint="@color/purple_500"
+        android:fontFamily="@font/audiowide"
+        android:hint="Fecha campeonato"
         android:textColor="@color/black"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName5"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName5"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName5" />
+        app:layout_constraintEnd_toEndOf="@+id/edt_nomCampeonatonuevo"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/edt_nomCampeonatonuevo"
+        app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
-    <EditText
-        android:id="@+id/editTextTextPersonName6"
+    <Button
+        android:id="@+id/btn_fechaCampeonato"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
-        android:ems="10"
-        android:hint="Inicio: dd/mm/aaaa"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName2"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName2"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="60dp"
+        android:background="@android:drawable/dialog_holo_light_frame"
+        android:backgroundTint="@color/purple_500"
+        android:fontFamily="@font/audiowide"
+        android:text="Seleccionar Fechas"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:onClick="Seleccionarfecha"
+        app:layout_constraintEnd_toEndOf="@+id/txt_rangoFechas"
+        app:layout_constraintStart_toStartOf="@+id/txt_rangoFechas"
+        app:layout_constraintTop_toBottomOf="@+id/txt_rangoFechas" />
 
-    <EditText
-        android:id="@+id/editTextTextPersonName7"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:ems="10"
-        android:hint="Fin: dd/mm/aaaa"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName6"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName6"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName6" />
 </androidx.constraintlayout.widget.ConstraintLayout>
