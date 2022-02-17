@@ -9,13 +9,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.example.mysimracing.RecicledListas.EventosTorneo;
 import com.example.mysimracing.RecicledListas.ListaEventosAdapter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
-
+/*
 public class MainActivity extends AppCompatActivity implements Serializable {
 
     //private TextView nombre_usuario;

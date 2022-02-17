@@ -12,8 +12,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.mysimracing.Clases.Campeonatos;
-import com.example.mysimracing.RecicledListas.EventosTorneo;
 import com.example.mysimracing.RecicledListas.ListaEventosAdapter;
+import com.mikhaellopez.circularimageview.CircularImageView;
 
 import java.util.ArrayList;
 
@@ -23,12 +23,14 @@ public class OrganizadorActivity extends AppCompatActivity {
     private ArrayList<Campeonatos> campeonatos = null;
     private RecyclerView rv_campeonatos = null;
     private ListaEventosAdapter adaptadorCampeonatos;
+    private CircularImageView circularImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_organizador);
         btn_crearCampeonato = findViewById(R.id.btn_nuevo_campeonato);
+        circularImageView = findViewById(R.id.img_perfil_piloto);
 
         rv_campeonatos = (RecyclerView) findViewById(R.id.rv_campeonatos);
         campeonatos = new ArrayList<Campeonatos>();

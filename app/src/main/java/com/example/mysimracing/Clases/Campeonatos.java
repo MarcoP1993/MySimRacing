@@ -14,7 +14,7 @@ public class Campeonatos implements Serializable {
     private String juego;
     private String plataforma;
     private String tipoCampeonato;
-    private Bitmap imagen;
+    private String imagen;
 
     public Campeonatos() {
     }
@@ -27,7 +27,7 @@ public class Campeonatos implements Serializable {
         this.tipoCampeonato = tipoCampeonato;
     }
 
-    public Campeonatos(String nombreCampeonato, String rango_fechas, String juego, String plataforma, String tipoCampeonato, Bitmap imagen) {
+    public Campeonatos(String nombreCampeonato, String rango_fechas, String juego, String plataforma, String tipoCampeonato, String imagen) {
         this.nombreCampeonato = nombreCampeonato;
         this.rango_fechas = rango_fechas;
         this.juego = juego;
@@ -77,11 +77,11 @@ public class Campeonatos implements Serializable {
         this.tipoCampeonato = tipoCampeonato;
     }
 
-    public Bitmap getImagen() {
+    public String getImagen() {
         return imagen;
     }
 
-    public void setImagen(Bitmap imagen) {
+    public void setImagen(String imagen) {
         this.imagen = imagen;
     }
 

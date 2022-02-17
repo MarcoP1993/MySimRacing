@@ -8,8 +8,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.mysimracing.AjustesCampeonatoActivity;
 import com.example.mysimracing.NormativaActivity;
 import com.example.mysimracing.R;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 public class EventoDetallesActivity extends AppCompatActivity {
 
@@ -23,6 +26,7 @@ public class EventoDetallesActivity extends AppCompatActivity {
     Button btn_calendario;
     Button btn_configuracion;
     Button btn_cerrar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +44,7 @@ public class EventoDetallesActivity extends AppCompatActivity {
         btn_configuracion = findViewById(R.id.btn_config);
         btn_cerrar = findViewById(R.id.btn_cerrar);
 
+
         btn_normativa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,6 +56,13 @@ public class EventoDetallesActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(EventoDetallesActivity.this, InscripcionesActivity.class));
+            }
+        });
+
+        btn_configuracion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(EventoDetallesActivity.this, AjustesCampeonatoActivity.class));
             }
         });
 
