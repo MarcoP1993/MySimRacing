@@ -2,6 +2,7 @@ package com.example.mysimracing.utilidades;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.util.Log;
 import android.widget.ImageView;
 
@@ -35,7 +36,7 @@ public class ImagenesFirebase {
     }
 
 
-    public void subirFoto(final ImagenesFirebase.FotoStatus fotoStatus, String email, int id_campeonato, ImageView img_add_foto) {
+    public void subirFoto(final ImagenesFirebase.FotoStatus fotoStatus, String email, String tipoImagen, ImageView img_add_foto) {
         //----------- convierto el imageView a Bitmap
         img_add_foto.setDrawingCacheEnabled(true);
         img_add_foto.buildDrawingCache();
@@ -46,7 +47,7 @@ public class ImagenesFirebase {
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
         // StorageReference imagesRef = storageRef.child("imagenes");
-        StorageReference foto2Ref = storageRef.child(email+"/"+String.valueOf(id_campeonato)+".png");
+        StorageReference foto2Ref = storageRef.child(tipoImagen + "/" + email + tipoImagen +".png");
         UploadTask uploadTask = foto2Ref.putBytes(data);
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
@@ -72,7 +73,7 @@ public class ImagenesFirebase {
         StorageReference storageRef = storage.getReference();
         StorageReference islandRef = storageRef.child(foto);
 
-        final long tam_foto = 10240 * 1024; // tamaño máximo de la descarga de la imagen, si es mayor la descarga falla.
+        final long tam_foto = 1024 * 1024; // tamaño máximo de la descarga de la imagen, si es mayor la descarga falla.
         islandRef.getBytes(tam_foto).addOnSuccessListener(new OnSuccessListener<byte[]>() {
             @Override
             public void onSuccess(byte[] bytes) {
@@ -116,4 +117,6 @@ public class ImagenesFirebase {
             }
         });
     }
+
+
 }

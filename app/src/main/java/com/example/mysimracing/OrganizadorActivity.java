@@ -1,48 +1,89 @@
 package com.example.mysimracing;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.mysimracing.Clases.Campeonatos;
 import com.example.mysimracing.RecicledListas.ListaEventosAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.mikhaellopez.circularimageview.CircularImageView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class OrganizadorActivity extends AppCompatActivity {
 
     private Button btn_crearCampeonato;
     private ArrayList<Campeonatos> campeonatos = null;
     private RecyclerView rv_campeonatos = null;
-    private ListaEventosAdapter adaptadorCampeonatos;
+    private CampeonatosAdapter adaptadorCampeonatos;
     private CircularImageView circularImageView;
+    
+    private FirebaseFirestore firestoredb;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_organizador);
+        mAuth = FirebaseAuth.getInstance();
+        firestoredb = FirebaseFirestore.getInstance();
+
         btn_crearCampeonato = findViewById(R.id.btn_nuevo_campeonato);
         circularImageView = findViewById(R.id.img_perfil_piloto);
 
         rv_campeonatos = (RecyclerView) findViewById(R.id.rv_campeonatos);
-        campeonatos = new ArrayList<Campeonatos>();
-
-        campeonatos.add(new Campeonatos("Torneo 1", "12feb - 04May", "GT Sport", "PS4", "individual"));
-        campeonatos.add(new Campeonatos("Torneo 2", "12feb - 04May", "Forza", "XBOX", "individual"));
-        campeonatos.add(new Campeonatos("Torneo 3", "12feb - 04May", "F1 2021", "PS5", "equipos"));
-        campeonatos.add(new Campeonatos("Torneo 4", "12feb - 04May", "iRacing", "PC", "equipos"));
-
-        adaptadorCampeonatos = new ListaEventosAdapter(this,campeonatos);
-        rv_campeonatos.setAdapter(adaptadorCampeonatos);
         rv_campeonatos.setLayoutManager(new LinearLayoutManager(this));
+        campeonatos = new ArrayList<>();
+
+        adaptadorCampeonatos = new CampeonatosAdapter(campeonatos);
+        //adaptadorCampeonatos.notifyDataSetChanged();
+        rv_campeonatos.setAdapter(adaptadorCampeonatos);
+
+        firestoredb.collection("Campeonatos").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                for (DocumentSnapshot camp:list) {
+                    Campeonatos obj=camp.toObject(Campeonatos.class);
+                    campeonatos.add(obj);
+                }
+                adaptadorCampeonatos.notifyDataSetChanged();
+            }
+        });
+
+        //Query consulta = firestoredb.collection("Campeonatos");
+
+        /*FirestoreRecyclerOptions<Campeonatos> campeonatosFirestoreRecyclerOptions = new FirestoreRecyclerOptions.Builder<Campeonatos>()
+                .setQuery(consulta, Campeonatos.class).build();*/
+
+
+
+
 
         btn_crearCampeonato.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,6 +92,7 @@ public class OrganizadorActivity extends AppCompatActivity {
             }
         });
     }
+
 
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu_principal, menu);
