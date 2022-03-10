@@ -3,11 +3,16 @@ package com.example.mysimracing.Clases;
 import android.graphics.Bitmap;
 import android.widget.DatePicker;
 
+import com.google.firebase.firestore.Exclude;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
 public class Campeonatos implements Serializable {
+
+    @Exclude
+    private String id;
 
     private String nombreCampeonato;
     private String rango_fechas;
@@ -36,6 +41,13 @@ public class Campeonatos implements Serializable {
         this.imagen = imagen;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getNombreCampeonato() {
         return nombreCampeonato;

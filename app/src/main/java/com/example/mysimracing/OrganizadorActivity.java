@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mysimracing.Clases.Campeonatos;
@@ -42,6 +43,8 @@ public class OrganizadorActivity extends AppCompatActivity {
     private RecyclerView rv_campeonatos = null;
     private CampeonatosAdapter adaptadorCampeonatos;
     private CircularImageView circularImageView;
+    private TextView nombreOrg;
+    String nombre;
     
     private FirebaseFirestore firestoredb;
     private FirebaseAuth mAuth;
@@ -63,6 +66,11 @@ public class OrganizadorActivity extends AppCompatActivity {
         adaptadorCampeonatos = new CampeonatosAdapter(campeonatos);
         //adaptadorCampeonatos.notifyDataSetChanged();
         rv_campeonatos.setAdapter(adaptadorCampeonatos);
+
+        nombreOrg = findViewById(R.id.txt_nom_organizador);
+        Intent intent = getIntent();
+        nombre = intent.getStringExtra("Nombre");
+        nombreOrg.setText(nombre);
 
         firestoredb.collection("Campeonatos").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
@@ -103,11 +111,14 @@ public class OrganizadorActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if(id == R.id.perfil_menu){
+            startActivity(new Intent(OrganizadorActivity.this, PerfilUsuarioActivity.class));
 
         }else if (id == R.id.info_menu){
 
         }else if (id == R.id.cerrar_sesion){
-
+            FirebaseAuth.getInstance().signOut();
+            startActivity(new Intent(OrganizadorActivity.this, LoginActivity.class));
+            finish();
         }
 
         return super.onOptionsItemSelected(item);

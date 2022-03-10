@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -19,6 +20,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -57,14 +59,18 @@ public class RegistroActivity extends AppCompatActivity {
         txt_correo = (EditText) findViewById(R.id.edt_email_registro);
         txt_password = (EditText) findViewById(R.id.edt_pass_registro);
         btn_registro = (Button) findViewById(R.id.btn_registrarse);
-        rg_roles = (RadioGroup) findViewById(R.id.radio_group_roles);
-        rb_organizador = (RadioButton) findViewById(R.id.Rb_organizador);
-        rb_jefe_equipo = (RadioButton) findViewById(R.id.Rb_jefe_equipo);
-        rb_piloto = (RadioButton) findViewById(R.id.Rb_piloto);
+        rg_roles = (RadioGroup) findViewById(R.id.radio_group_roles_perfil);
+        rb_organizador = (RadioButton) findViewById(R.id.Rb_organizador_perfil);
+        rb_jefe_equipo = (RadioButton) findViewById(R.id.Rb_jefe_equipo_perfil);
+        rb_piloto = (RadioButton) findViewById(R.id.Rb_piloto_perfil);
 
 
         firebaseAuth = FirebaseAuth.getInstance();
         firestoredb = FirebaseFirestore.getInstance();
+
+        //logica RadioBox
+
+
 
         btn_registro.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,11 +81,21 @@ public class RegistroActivity extends AppCompatActivity {
                 contraseña = txt_password.getText().toString();
                 role = "";
 
-                if(!nombre.isEmpty() && !nickname.isEmpty() && !correo.isEmpty() && !contraseña.isEmpty() && role.isEmpty()){
+                if(!nombre.isEmpty() && !nickname.isEmpty() && !correo.isEmpty() && !contraseña.isEmpty()){
 
                     if(contraseña.length() >= 6) {
-                        elegirRole();
-                        registrarse();
+
+
+                        if(!(rb_organizador.isChecked() || rb_jefe_equipo.isChecked() || rb_piloto.isChecked())){
+
+                            Toast.makeText(RegistroActivity.this, "Selecciona un rol", Toast.LENGTH_SHORT).show();
+                            return;
+
+                        }else{
+                            elegirRole();
+                            registrarse();
+                        }
+
 
                     }else {
                         Toast.makeText(RegistroActivity.this, "La contraseña debe tener minimo 6 caracteres", Toast.LENGTH_LONG).show();
@@ -99,9 +115,9 @@ public class RegistroActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
+                    FirebaseUser user = firebaseAuth.getCurrentUser();
                     Toast.makeText(RegistroActivity.this, "Usuario creado correctamente", Toast.LENGTH_SHORT).show();
-                    idUsuario = firebaseAuth.getCurrentUser().getUid();
-                    DocumentReference documentReference = firestoredb.collection("Usuarios").document(idUsuario);
+                    DocumentReference documentReference = firestoredb.collection("Usuarios").document(user.getUid());
 
                     Usuarios usuarios = new Usuarios(nombre,nickname,correo, contraseña, role);
                     //EventosTorneo eventos = new EventosTorneo("nombre 1", "seseña", "ps4", false);
@@ -112,27 +128,13 @@ public class RegistroActivity extends AppCompatActivity {
                     user.put("Email", correo);
                     user.put("Contraseña", contraseña);
                     user.put("Role", role);*/
+
                     documentReference.set(usuarios).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
-                            Log.d(TAG,"Perfil del usuario creado " + idUsuario);
+                            Log.d(TAG,"Perfil del usuario creado " + user);
                         }
                     });
-
-                    finish();
-                    /*mDatabaseReference.child("Usuarios").child(id).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task2) {
-                            if(task2.isSuccessful()){
-                                startActivity(new Intent(RegistroActivity.this, RoleActivity.class));
-                                finish();
-                            }else{
-                                Toast.makeText(RegistroActivity.this, "No se pudo crear los datos en correctamente", Toast.LENGTH_LONG).show();
-
-                            }
-                        }
-                    });*/
-
                 }else {
                     Toast.makeText(RegistroActivity.this, "El usuario ya existe, intentalo con otro correo", Toast.LENGTH_LONG).show();
 
@@ -141,59 +143,47 @@ public class RegistroActivity extends AppCompatActivity {
         });
     }
 
+
+
+
     public void elegirRole (){
         int seleccionadoOk = rg_roles.getCheckedRadioButtonId();
 
-        if(seleccionadoOk == R.id.Rb_organizador){
+        if(seleccionadoOk == R.id.Rb_organizador_perfil){
 
             role = "Organizador";
             Toast.makeText(this,"Has seleccionado Organizador",Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(RegistroActivity.this, OrganizadorActivity.class));
+            Intent intent = new Intent(getApplicationContext(), OrganizadorActivity.class);
+            String nombre = txt_nombre.getText().toString();
+            intent.putExtra("Nombre", nombre);
+            startActivity(intent);
 
-        }else if(seleccionadoOk == R.id.Rb_jefe_equipo){
+        }else if(seleccionadoOk == R.id.Rb_jefe_equipo_perfil){
 
             role = "Jefe de Equipo";
             Toast.makeText(this,"Has seleccionado Jefe de equipo",Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(RegistroActivity.this, ActivityJefeEquipo.class));
+            Intent intent = new Intent(getApplicationContext(), ActivityJefeEquipo.class);
+            String nombre = txt_nombre.getText().toString();
+            intent.putExtra("Nombre", nombre);
+            startActivity(intent);
 
-        }else if (seleccionadoOk == R.id.Rb_piloto){
+        }else if (seleccionadoOk == R.id.Rb_piloto_perfil){
 
             role = "Piloto";
             Toast.makeText(this,"Has seleccionado Piloto",Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(RegistroActivity.this, ActivityPiloto.class));
+            Intent intent = new Intent(getApplicationContext(), ActivityPiloto.class);
+            String nombre = txt_nombre.getText().toString();
+            String nick = txt_nickname.getText().toString();
+            intent.putExtra("Nombre", nombre);
+            intent.putExtra("nickname", nick);
+            startActivity(intent);
 
         }else {
             Toast.makeText(RegistroActivity.this, "Selecciona un rol", Toast.LENGTH_SHORT).show();
-            return;
+
         }
 
         }
     }
-
-    /*private void elegirRole(View view) {
-        boolean seleccionadoOk = ((RadioButton)view).isChecked(); //asi se ve si esta seleccionado una opcion.
-        switch (view.getId())
-        {
-            case R.id.Rb_organizador:
-                if (seleccionadoOk){
-                    Toast.makeText(this,"Has seleccionado Organizador",Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(RegistroActivity.this, OrganizadorActivity.class));
-                }
-                break;
-            case R.id.Rb_jefe_equipo:
-                if (seleccionadoOk){
-                    Toast.makeText(this,"Has seleccionado Jefe de equipo",Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(RegistroActivity.this, ActivityJefeEquipo.class));
-                }
-                break;
-
-            case R.id.Rb_piloto:
-                if (seleccionadoOk){
-                    Toast.makeText(this,"Has seleccionado Piloto",Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(RegistroActivity.this, ActivityPiloto.class));
-                }
-                break;
-        }
-    }*/
 
 

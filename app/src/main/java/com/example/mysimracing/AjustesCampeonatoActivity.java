@@ -20,15 +20,19 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.mysimracing.Clases.Campeonatos;
 import com.example.mysimracing.utilidades.ImagenesFirebase;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -39,7 +43,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class AjustesCampeonatoActivity extends AppCompatActivity {
@@ -51,6 +57,7 @@ public class AjustesCampeonatoActivity extends AppCompatActivity {
     private StorageReference storageRef;
     private FirebaseAuth firebaseAuth;
     private String id = "";
+    private Campeonatos campeonatos;
 
     private FirebaseFirestore firestoredb = FirebaseFirestore.getInstance();
 
@@ -128,15 +135,22 @@ public class AjustesCampeonatoActivity extends AppCompatActivity {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(intent,10);
             }else if(items[item].equals("Elegir del archivo")){
-                Intent intent = new Intent(Intent.ACTION_PICK);
+                /*Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setType("image/*");
-                startActivityForResult(Intent.createChooser(intent,"selecciona imagen"),20);
+                startActivityForResult(Intent.createChooser(intent,"selecciona imagen"),20);*/
+                Intent pickIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                pickIntent.setType("image/*");
+
+                Intent chooserIntent = Intent.createChooser(getIntent(), "Selecciona una imagen");
+                chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[] {pickIntent});
+                startActivityForResult(chooserIntent, GALERIA_IMAGENES);
             }else if(items[item].equals("Cancelar")){
                 dialog.dismiss();
             }
         });
         builder.show();
     }
+
         /*Intent getIntent = new Intent(Intent.ACTION_GET_CONTENT);
         getIntent.setType("image/*");
 
@@ -146,23 +160,24 @@ public class AjustesCampeonatoActivity extends AppCompatActivity {
         Intent chooserIntent = Intent.createChooser(getIntent, "Selecciona una imagen");
         chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[] {pickIntent});
         startActivityForResult(chooserIntent, GALERIA_IMAGENES);*/
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 20 && resultCode == RESULT_OK && data !=null) {
-            final Uri path = data.getData();
-            Thread thread = new Thread(() ->{
-               try {
-                   InputStream inputStream = getContentResolver().openInputStream(path);
-                   Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                   actualizarImagenCampeonato.post(() ->{
-                      actualizarImagenCampeonato.setImageBitmap(bitmap);
-                   });
-               } catch (FileNotFoundException e) {
-                   e.printStackTrace();
-               }
-            });
+        if (requestCode == GALERIA_IMAGENES && resultCode == RESULT_OK && data !=null) {
+            imagen_seleccionada = data.getData();
+            Bitmap bitmap = null;
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imagen_seleccionada);
+                //bitmap.setWidth(150);
+                //bitmap.setHeight(150);
+                actualizarImagenCampeonato.setImageBitmap(bitmap);
+
+                //---------------------------------------------
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
             //imagen_seleccionada = data.getData();
             //Bitmap bitmap = null;
             /*try {
@@ -198,9 +213,9 @@ public class AjustesCampeonatoActivity extends AppCompatActivity {
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] data = baos.toByteArray();
 
-        //Actualizar
+        //Subir imagen
         FirebaseStorage fstorage = FirebaseStorage.getInstance();
-        storageRef = fstorage.getReference("ImagenesCampeoanto");
+        storageRef = fstorage.getReference("campeonato").child("imagen" + Timestamp.now().toDate().getTime() + ".jpg");
         UploadTask uploadTask = storageRef.putBytes(data);
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
@@ -240,14 +255,13 @@ public class AjustesCampeonatoActivity extends AppCompatActivity {
     }
 
     private void guardarDatos(String nombreCampeonato, String imagen) {
+
         Map<String, Object> campeonato = new HashMap<>();
         campeonato.put("nombreCampeonato", nombreCampeonato);
         campeonato.put("imagen", imagen);
 
-        progressDialog.show();
-
         if(id !=null){
-            firestoredb.collection("Campeonatos").document().set(campeonato).addOnCompleteListener(new OnCompleteListener<Void>() {
+            firestoredb.collection("Campeonatos").document(id).set(campeonato).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if(task.isSuccessful()){
@@ -273,6 +287,7 @@ public class AjustesCampeonatoActivity extends AppCompatActivity {
                 }
             });
         }
+
 
     }
 

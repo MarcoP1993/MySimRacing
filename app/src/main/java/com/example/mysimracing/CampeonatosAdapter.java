@@ -45,6 +45,9 @@ public class CampeonatosAdapter extends RecyclerView.Adapter<CampeonatosAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, @SuppressLint("RecyclerView") final int position) {
+
+
+
         holder.txt_competicion.setText("Nombre Campeonato: " + listaCampeonatos.get(position).getNombreCampeonato());
         holder.txt_juego.setText("Videojuego: " + listaCampeonatos.get(position).getJuego());
         holder.txt_plataforma.setText("Plataforma: " + listaCampeonatos.get(position).getPlataforma());

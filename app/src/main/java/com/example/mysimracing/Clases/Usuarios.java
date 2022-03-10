@@ -1,10 +1,10 @@
 package com.example.mysimracing.Clases;
 
-import androidx.appcompat.app.AppCompatActivity;
+
 
 import java.io.Serializable;
 
-public class Usuarios extends AppCompatActivity implements Serializable {
+public class Usuarios implements Serializable {
 
      String nombre;
      String nickname;

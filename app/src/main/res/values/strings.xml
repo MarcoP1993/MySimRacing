@@ -30,5 +30,9 @@
     <string name="info_menu">Información</string>
     <string name="individual">Individual</string>
     <string name="equipos">Equipos</string>
+    <string name="selecciona_tu_nuevo_rol">Selecciona tu nuevo rol:</string>
+    <string name="btn_actualizar_perfil">Actualizar Perfil</string>
+    <string name="txt_mi_perfil">Mi Perfil</string>
+    <string name="img_perfil">TODO</string>
 
 </resources>

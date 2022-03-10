@@ -124,7 +124,7 @@
         tools:ignore="TextContrastCheck" />
 
     <RadioGroup
-        android:id="@+id/radio_group_roles"
+        android:id="@+id/radio_group_roles_perfil"
         android:layout_width="0dp"
         android:layout_height="107dp"
         android:layout_marginTop="16dp"
@@ -136,7 +136,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txt_roles">
 
         <RadioButton
-            android:id="@+id/Rb_organizador"
+            android:id="@+id/Rb_organizador_perfil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -148,7 +148,7 @@
             tools:ignore="TouchTargetSizeCheck" />
 
         <RadioButton
-            android:id="@+id/Rb_jefe_equipo"
+            android:id="@+id/Rb_jefe_equipo_perfil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -160,7 +160,7 @@
             tools:ignore="TouchTargetSizeCheck" />
 
         <RadioButton
-            android:id="@+id/Rb_piloto"
+            android:id="@+id/Rb_piloto_perfil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -195,7 +195,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/radio_group_roles"
+        app:layout_constraintTop_toTopOf="@+id/radio_group_roles_perfil"
         app:srcCompat="@drawable/disenocuatro" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
