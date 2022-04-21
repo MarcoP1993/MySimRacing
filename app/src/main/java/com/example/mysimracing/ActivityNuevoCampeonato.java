@@ -12,8 +12,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mysimracing.Clases.Campeonatos;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,6 +32,8 @@ public class ActivityNuevoCampeonato extends AppCompatActivity {
     Button seleccionar_fechas;
     Button crearCampeonato;
 
+    private String idUsuario;
+    private FirebaseAuth firebaseAuth;
     private FirebaseFirestore firestoredb;
 
     //valores a guardar
@@ -38,6 +42,7 @@ public class ActivityNuevoCampeonato extends AppCompatActivity {
     private String juego;
     private String plataforma;
     private String tipoCampeonato;
+    private String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +57,9 @@ public class ActivityNuevoCampeonato extends AppCompatActivity {
         crearCampeonato = (Button) findViewById(R.id.btn_crearCampeonato);
         seleccionar_fechas = (Button) findViewById(R.id.btn_fechaCampeonato);
 
+        firebaseAuth = FirebaseAuth.getInstance();
         firestoredb = FirebaseFirestore.getInstance();
+        idUsuario = firebaseAuth.getCurrentUser().getEmail();
 
 
         crearCampeonato.setOnClickListener(new View.OnClickListener() {
@@ -64,22 +71,17 @@ public class ActivityNuevoCampeonato extends AppCompatActivity {
                 plataforma = plataforma_campeonato.getText().toString();
                 tipoCampeonato = tipo_campeonato.getText().toString();
 
-
-
                     if (!nombreCampeonato.isEmpty() && !juego.isEmpty() && !plataforma.isEmpty() && !tipoCampeonato.isEmpty() && !rango_fechas.isEmpty()) {
 
+                        Campeonatos campeonato = new Campeonatos(nombreCampeonato, rango_fechas, juego, plataforma, tipoCampeonato, null, idUsuario);
 
-                        Campeonatos campeonato = new Campeonatos(nombreCampeonato, rango_fechas, juego, plataforma, tipoCampeonato);
-
-                        firestoredb.collection("Campeonatos").add(campeonato).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        firestoredb.collection("Campeonatos").document().set(campeonato).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
-                            public void onSuccess(DocumentReference documentReference) {
-
-                                Toast.makeText(ActivityNuevoCampeonato.this, "Campeonato creado correctamente", Toast.LENGTH_SHORT).show();
-
+                            public void onSuccess(Void unused) {
+                                Toast.makeText(ActivityNuevoCampeonato.this, "Campeonato Creado Correctamente", Toast.LENGTH_SHORT).show();
+                                finish();
                             }
-                        })
-                                .addOnFailureListener(new OnFailureListener() {
+                        }).addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
                                         Toast.makeText(ActivityNuevoCampeonato.this, "Error al crear el campeonato", Toast.LENGTH_SHORT).show();

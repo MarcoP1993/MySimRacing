@@ -23,7 +23,6 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
 
     private EditText edt_nombre_perfil;
     private EditText edt_nick_perfil;
-    private EditText edt_email_perfil;
     private TextView nombre_perfil, nick_perfil;
     private CircularImageView imagenUsuario;
     private RadioGroup rg_roles_perfil = null;
@@ -51,7 +50,6 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
 
         edt_nombre_perfil = (EditText) findViewById(R.id.edt_nombre);
         edt_nick_perfil = (EditText) findViewById(R.id.edt_Nickname);
-        edt_email_perfil = (EditText) findViewById(R.id.edt_email_registro);
         rg_roles_perfil = (RadioGroup) findViewById(R.id.radio_group_roles_perfil);
         rb_organizador_perfil = (RadioButton) findViewById(R.id.Rb_organizador_perfil);
         rb_jefe_equipo_perfil = (RadioButton) findViewById(R.id.Rb_jefe_equipo_perfil);

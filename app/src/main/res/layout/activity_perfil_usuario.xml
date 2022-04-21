@@ -54,28 +54,6 @@
         app:layout_constraintTop_toBottomOf="@+id/edt_nombrePerfil"
         tools:ignore="TextContrastCheck" />
 
-    <EditText
-        android:id="@+id/edt_email_perfil"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="8dp"
-        android:background="@android:drawable/editbox_dropdown_dark_frame"
-        android:backgroundTint="@color/white"
-        android:ems="10"
-        android:fontFamily="@font/audiowide"
-        android:hint="@string/edt_email_registro"
-        android:importantForAutofill="no"
-        android:inputType="textEmailAddress"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/edt_NicknamePerfil"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/edt_NicknamePerfil"
-        app:layout_constraintTop_toBottomOf="@+id/edt_NicknamePerfil"
-        tools:ignore="TextContrastCheck" />
-
     <RadioGroup
         android:id="@+id/radio_group_roles_perfil"
         android:layout_width="348dp"
@@ -137,23 +115,23 @@
         android:textColor="@color/black"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/edt_email_perfil"
+        app:layout_constraintEnd_toEndOf="@+id/edt_NicknamePerfil"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/edt_email_perfil"
-        app:layout_constraintTop_toBottomOf="@+id/edt_email_perfil" />
+        app:layout_constraintStart_toStartOf="@+id/edt_NicknamePerfil"
+        app:layout_constraintTop_toBottomOf="@+id/edt_NicknamePerfil" />
 
     <TextView
         android:id="@+id/textView26"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/audiowide"
         android:text="@string/txt_mi_perfil"
         android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.48"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -174,7 +152,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
+        android:fontFamily="@font/audiowide"
         android:text="@string/btn_actualizar_perfil"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="@+id/radio_group_roles_perfil"
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="@+id/radio_group_roles_perfil"
@@ -198,7 +178,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="9dp"
         android:fontFamily="@font/audiowide"
-        android:text="Nombre"
+        android:text="@string/nombre_user"
         android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/img_perfil"
@@ -211,11 +191,27 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="11dp"
         android:fontFamily="@font/audiowide"
-        android:text="Nick"
+        android:text="@string/nick"
         android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/txt_nombre_perfil"
         app:layout_constraintStart_toStartOf="@+id/txt_nombre_perfil"
         app:layout_constraintTop_toBottomOf="@+id/txt_nombre_perfil" />
+
+    <Button
+        android:id="@+id/btn_borrar_perfil"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:backgroundTint="@color/ic_btn_add_background"
+        android:fontFamily="@font/audiowide"
+        android:text="@string/borrar_cuenta"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/btn_act_perfil"
+        app:layout_constraintStart_toStartOf="@+id/btn_act_perfil"
+        app:layout_constraintTop_toBottomOf="@+id/btn_act_perfil" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialComponents.Light.DarkActionBar">
         <activity
+            android:name=".InfoAppActivity"
+            android:exported="false" />
+        <activity
             android:name=".PerfilUsuarioActivity"
             android:exported="false" />
         <activity
@@ -36,7 +39,8 @@
             android:exported="false" />
         <activity
             android:name=".OrganizadorActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.DayNight" />
         <activity
             android:name=".ActivityPiloto"
             android:exported="false" />

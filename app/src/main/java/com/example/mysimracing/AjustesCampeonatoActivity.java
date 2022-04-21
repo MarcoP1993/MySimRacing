@@ -56,7 +56,8 @@ public class AjustesCampeonatoActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private StorageReference storageRef;
     private FirebaseAuth firebaseAuth;
-    private String id = "";
+    private String id;
+    private String idUsuario;
     private Campeonatos campeonatos;
 
     private FirebaseFirestore firestoredb = FirebaseFirestore.getInstance();
@@ -93,6 +94,8 @@ public class AjustesCampeonatoActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(AjustesCampeonatoActivity.this);
         progressDialog.setTitle("Cargando");
         progressDialog.setMessage("Espere...");
+
+        idUsuario = firebaseAuth.getCurrentUser().getEmail();
 
         btn_cambio_imagen.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -256,36 +259,50 @@ public class AjustesCampeonatoActivity extends AppCompatActivity {
 
     private void guardarDatos(String nombreCampeonato, String imagen) {
 
-        Map<String, Object> campeonato = new HashMap<>();
-        campeonato.put("nombreCampeonato", nombreCampeonato);
-        campeonato.put("imagen", imagen);
+        Campeonatos c = new Campeonatos();
+        c.setNombreCampeonato(nombreCampeonato);
+        c.setImagen(imagen);
 
-        if(id !=null){
-            firestoredb.collection("Campeonatos").document(id).set(campeonato).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+        if(idUsuario !=null){
+            firestoredb.collection("Campeonatos").document(idUsuario).set(c).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if(task.isSuccessful()){
-                        Toast.makeText(AjustesCampeonatoActivity.this, "Guardado Correcto", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AjustesCampeonatoActivity.this, "Actualizado", Toast.LENGTH_SHORT).show();
                         finish();
                     }else {
-                        Toast.makeText(AjustesCampeonatoActivity.this, "No se ha podido guardar", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AjustesCampeonatoActivity.this, "No se ha podido actualizar", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
-        }else {
-            firestoredb.collection("Campeonatos").add(campeonato).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+        }/*else {
+            firestoredb.collection("Campeonatos").document(idUsuario).set(campeonato).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
-                public void onSuccess(DocumentReference documentReference) {
-                    Toast.makeText(AjustesCampeonatoActivity.this, "Actualizado", Toast.LENGTH_SHORT).show();
+                public void onComplete(@NonNull Task<Void> task) {
+                    Toast.makeText(AjustesCampeonatoActivity.this, "Creado Correctamente", Toast.LENGTH_SHORT).show();
                     progressDialog.dismiss();
                     finish();
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(AjustesCampeonatoActivity.this, "Fallo al actualizar", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AjustesCampeonatoActivity.this, "Error al crear", Toast.LENGTH_SHORT).show();
                 }
-            });
+            });*/
+            /*firestoredb.collection("Campeonatos").add(campeonato).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                @Override
+                public void onSuccess(DocumentReference documentReference) {
+                    Toast.makeText(AjustesCampeonatoActivity.this, "Creado Correctamente", Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
+                    finish();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(AjustesCampeonatoActivity.this, "Fallo al crear", Toast.LENGTH_SHORT).show();
+                }
+            });*/
         }
 
 
@@ -297,4 +314,3 @@ public class AjustesCampeonatoActivity extends AppCompatActivity {
 
 
 
-}

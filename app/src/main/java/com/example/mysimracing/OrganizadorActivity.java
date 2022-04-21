@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -45,6 +46,8 @@ public class OrganizadorActivity extends AppCompatActivity {
     private CircularImageView circularImageView;
     private TextView nombreOrg;
     String nombre;
+
+    SwipeRefreshLayout swipeActualizar;
     
     private FirebaseFirestore firestoredb;
     private FirebaseAuth mAuth;
@@ -72,6 +75,14 @@ public class OrganizadorActivity extends AppCompatActivity {
         nombre = intent.getStringExtra("Nombre");
         nombreOrg.setText(nombre);
 
+        swipeActualizar = findViewById(R.id.swipeActualizar);
+        swipeActualizar.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+            }
+        });
+
         firestoredb.collection("Campeonatos").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -81,6 +92,7 @@ public class OrganizadorActivity extends AppCompatActivity {
                     campeonatos.add(obj);
                 }
                 adaptadorCampeonatos.notifyDataSetChanged();
+                //swipeActualizar.setRefreshing(false);
             }
         });
 
@@ -88,10 +100,6 @@ public class OrganizadorActivity extends AppCompatActivity {
 
         /*FirestoreRecyclerOptions<Campeonatos> campeonatosFirestoreRecyclerOptions = new FirestoreRecyclerOptions.Builder<Campeonatos>()
                 .setQuery(consulta, Campeonatos.class).build();*/
-
-
-
-
 
         btn_crearCampeonato.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,6 +122,7 @@ public class OrganizadorActivity extends AppCompatActivity {
             startActivity(new Intent(OrganizadorActivity.this, PerfilUsuarioActivity.class));
 
         }else if (id == R.id.info_menu){
+            startActivity(new Intent(OrganizadorActivity.this, InfoAppActivity.class));
 
         }else if (id == R.id.cerrar_sesion){
             FirebaseAuth.getInstance().signOut();

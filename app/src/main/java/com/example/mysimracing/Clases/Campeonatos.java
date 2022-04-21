@@ -11,9 +11,7 @@ import java.util.Objects;
 
 public class Campeonatos implements Serializable {
 
-    @Exclude
     private String id;
-
     private String nombreCampeonato;
     private String rango_fechas;
     private String juego;
@@ -32,13 +30,14 @@ public class Campeonatos implements Serializable {
         this.tipoCampeonato = tipoCampeonato;
     }
 
-    public Campeonatos(String nombreCampeonato, String rango_fechas, String juego, String plataforma, String tipoCampeonato, String imagen) {
+    public Campeonatos(String nombreCampeonato, String rango_fechas, String juego, String plataforma, String tipoCampeonato, String imagen, String id) {
         this.nombreCampeonato = nombreCampeonato;
         this.rango_fechas = rango_fechas;
         this.juego = juego;
         this.plataforma = plataforma;
         this.tipoCampeonato = tipoCampeonato;
         this.imagen = imagen;
+        this.id = id;
     }
 
     public String getId() {

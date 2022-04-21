@@ -21,14 +21,14 @@
         android:id="@+id/txt_nom_organizador"
         android:layout_width="155dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="92dp"
         android:fontFamily="@font/aldrich"
-        android:text="Nombre Org."
+        android:text="@string/nombre_org"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.769"
+        app:layout_constraintHorizontal_bias="0.781"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="252dp"
         android:fontFamily="@font/aldrich"
-        android:text="Mis Campeonatos"
+        android:text="Campeonatos"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -60,24 +60,35 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_campeonatos"
-        android:layout_width="0dp"
-        android:layout_height="406dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeActualizar"
+        android:layout_width="387dp"
+        android:layout_height="402dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider3" />
+        app:layout_constraintTop_toBottomOf="@+id/textView11">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_campeonatos"
+            android:layout_width="0dp"
+            android:layout_height="406dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/divider3" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <Button
         android:id="@+id/btn_nuevo_campeonato"
-        android:layout_width="70dp"
-        android:layout_height="67dp"
+        android:layout_width="76dp"
+        android:layout_height="77dp"
         android:layout_marginEnd="36dp"
         android:layout_marginBottom="40dp"
-        android:background="@drawable/btn_anadir"
+        android:background="@drawable/add24"
         android:textColor="@color/white"
         android:textSize="34sp"
         android:textStyle="bold"

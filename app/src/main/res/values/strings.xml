@@ -34,5 +34,11 @@
     <string name="btn_actualizar_perfil">Actualizar Perfil</string>
     <string name="txt_mi_perfil">Mi Perfil</string>
     <string name="img_perfil">TODO</string>
+    <string name="nombre_user">Nombre user</string>
+    <string name="nick">Nick</string>
+    <string name="borrar_cuenta">Borrar Cuenta</string>
+    <string name="nombre_org">Nombre Org.</string>
+    <string name="linkGithub">https://github.com/MarcoP1993/MySimRacing</string>
+    <string name="contactodev">marcoaperea10@gmail.com</string>
 
 </resources>
