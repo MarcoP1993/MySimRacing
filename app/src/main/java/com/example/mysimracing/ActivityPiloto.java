@@ -1,6 +1,9 @@
 package com.example.mysimracing;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,14 +11,30 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.example.mysimracing.Clases.Campeonatos;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.mikhaellopez.circularimageview.CircularImageView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ActivityPiloto extends AppCompatActivity {
 
     private CircularImageView circularImageView;
-    String nombre, nick;
+    private String nombre, nick;
     private TextView txt_nom_piloto, txt_nick_piloto;
+    private RecyclerView rv_campeonato_piloto;
+    private CampeonatosAdapter campeonatosAdapter;
+    private ArrayList<Campeonatos> campeonatospiloto = null;
+
+    SwipeRefreshLayout swipeActualizar;
+
+    private FirebaseFirestore firestoredb;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +44,54 @@ public class ActivityPiloto extends AppCompatActivity {
         txt_nom_piloto = findViewById(R.id.txt_nom_piloto);
         txt_nick_piloto = findViewById(R.id.txt_nick_piloto);
 
+        mAuth = FirebaseAuth.getInstance();
+        firestoredb = FirebaseFirestore.getInstance();
+
+        rv_campeonato_piloto = (RecyclerView) findViewById(R.id.rv_piloto_campeonato);
+        rv_campeonato_piloto.setLayoutManager(new LinearLayoutManager(this));
+        campeonatospiloto = new ArrayList<>();
+
+        campeonatosAdapter = new CampeonatosAdapter(campeonatospiloto);
+        rv_campeonato_piloto.setAdapter(campeonatosAdapter);
+
+        swipeActualizar = findViewById(R.id.swipecamppiloto);
+        swipeActualizar.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                campeonatospiloto.clear();
+                firestoredb.collection("Campeonatos").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                        for (DocumentSnapshot camp:list) {
+                            Campeonatos obj=camp.toObject(Campeonatos.class);
+                            campeonatospiloto.add(obj);
+                        }
+                        campeonatosAdapter.notifyDataSetChanged();
+                        swipeActualizar.setRefreshing(false);
+
+                    }
+                });
+            }
+        });
+
+        firestoredb.collection("Campeonatos").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                for (DocumentSnapshot camp:list) {
+                    Campeonatos obj=camp.toObject(Campeonatos.class);
+                    campeonatospiloto.add(obj);
+
+                }
+                campeonatosAdapter.notifyDataSetChanged();
+                //swipeActualizar.setRefreshing(false);
+
+            }
+        });
+
         Intent intent = getIntent();
-        nombre = intent.getStringExtra("Nombre");
+        nombre = intent.getStringExtra("nombre");
         nick = intent.getStringExtra("nickname");
         txt_nom_piloto.setText(nombre);
         txt_nick_piloto.setText(nick);
@@ -45,6 +110,7 @@ public class ActivityPiloto extends AppCompatActivity {
             startActivity(new Intent(ActivityPiloto.this, PerfilUsuarioActivity.class));
 
         }else if (id == R.id.info_menu){
+            startActivity(new Intent(ActivityPiloto.this, InfoAppActivity.class));
 
         }else if (id == R.id.cerrar_sesion){
             FirebaseAuth.getInstance().signOut();

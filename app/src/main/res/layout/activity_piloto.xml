@@ -24,12 +24,12 @@
         android:layout_height="39dp"
         android:layout_marginTop="60dp"
         android:fontFamily="@font/aldrich"
-        android:text="Nombre Piloto"
+        android:text="@string/nombre_piloto_perfil"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.76"
+        app:layout_constraintHorizontal_bias="0.817"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,13 +37,14 @@
         android:id="@+id/txt_nick_piloto"
         android:layout_width="148dp"
         android:layout_height="39dp"
+        android:layout_marginTop="12dp"
         android:fontFamily="@font/aldrich"
-        android:text="Nickname"
+        android:text="@string/nickname_piloto_perfil"
         android:textColor="@color/black"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/txt_nom_piloto"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/txt_nom_piloto"
         app:layout_constraintTop_toBottomOf="@+id/txt_nom_piloto" />
 
@@ -52,7 +53,7 @@
         android:layout_width="0dp"
         android:layout_height="3dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="8dp"
         android:background="@color/ic_launcher_tux_background"
         app:layout_constraintEnd_toEndOf="parent"
@@ -75,5 +76,41 @@
         app:layout_constraintHorizontal_bias="0.11"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView31"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:fontFamily="@font/audiowide"
+        android:text="Campeonatos"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/divider2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+
+        android:id="@+id/swipecamppiloto"
+        android:layout_width="380dp"
+        android:layout_height="375dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider2">
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_piloto_campeonato"
+            android:layout_width="381dp"
+            android:layout_height="388dp"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginEnd="1dp"
+            android:layout_marginBottom="1dp" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
