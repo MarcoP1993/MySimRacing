@@ -79,7 +79,20 @@ public class OrganizadorActivity extends AppCompatActivity {
         swipeActualizar.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                campeonatos.clear();
+                firestoredb.collection("Campeonatos").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                        for (DocumentSnapshot camp:list) {
+                            Campeonatos obj=camp.toObject(Campeonatos.class);
+                            campeonatos.add(obj);
+                        }
+                        adaptadorCampeonatos.notifyDataSetChanged();
+                        swipeActualizar.setRefreshing(false);
 
+                    }
+                });
             }
         });
 
@@ -90,11 +103,15 @@ public class OrganizadorActivity extends AppCompatActivity {
                 for (DocumentSnapshot camp:list) {
                     Campeonatos obj=camp.toObject(Campeonatos.class);
                     campeonatos.add(obj);
+
                 }
                 adaptadorCampeonatos.notifyDataSetChanged();
                 //swipeActualizar.setRefreshing(false);
+
             }
         });
+
+
 
         //Query consulta = firestoredb.collection("Campeonatos");
 
