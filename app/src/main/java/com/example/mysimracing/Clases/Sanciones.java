@@ -2,7 +2,8 @@ package com.example.mysimracing.Clases;
 
 public class Sanciones {
 
-    private String equipo_piloto;
+    private String equipo;
+    private String piloto;
     private String circuito;
     private String tiempo;
     private String descripcion;
@@ -11,20 +12,29 @@ public class Sanciones {
     public Sanciones() {
     }
 
-    public Sanciones(String equipo_piloto, String circuito, String tiempo, String descripcion, String salas) {
-        this.equipo_piloto = equipo_piloto;
+    public Sanciones(String equipo, String piloto, String circuito, String tiempo, String descripcion, String salas) {
+        this.equipo = equipo;
+        this.piloto = piloto;
         this.circuito = circuito;
         this.tiempo = tiempo;
         this.descripcion = descripcion;
         this.salas = salas;
     }
 
-    public String getEquipo_piloto() {
-        return equipo_piloto;
+    public String getEquipo() {
+        return equipo;
     }
 
-    public void setEquipo_piloto(String equipo_piloto) {
-        this.equipo_piloto = equipo_piloto;
+    public void setEquipo(String equipo) {
+        this.equipo = equipo;
+    }
+
+    public String getPiloto() {
+        return piloto;
+    }
+
+    public void setPiloto(String piloto) {
+        this.piloto = piloto;
     }
 
     public String getCircuito() {
@@ -62,7 +72,8 @@ public class Sanciones {
     @Override
     public String toString() {
         return "Sanciones{" +
-                "equipo_piloto='" + equipo_piloto + '\'' +
+                "equipo='" + equipo + '\'' +
+                ", piloto='" + piloto + '\'' +
                 ", circuito='" + circuito + '\'' +
                 ", tiempo='" + tiempo + '\'' +
                 ", descripcion='" + descripcion + '\'' +

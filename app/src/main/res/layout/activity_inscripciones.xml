@@ -11,14 +11,15 @@
         android:id="@+id/textView16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/audiowide"
-        android:text="Solicitud Inscripción Campeonato Individual"
+        android:text="Enlace Inscripción Campeonato"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,13 +28,15 @@
         android:layout_width="0dp"
         android:layout_height="3dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="200dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
         android:background="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -45,55 +48,52 @@
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider6" />
+        app:layout_constraintTop_toBottomOf="@+id/divider6"
+        app:layout_constraintVertical_bias="0.0" />
 
-    <HorizontalScrollView
-        android:id="@+id/horizontalScrollView"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="24dp"
+    <TextView
+        android:id="@+id/textView33"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginBottom="4dp"
+        android:fontFamily="@font/audiowide"
+        android:text="Lista Competidores"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/divider6"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView16">
+        app:layout_constraintStart_toStartOf="parent" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent">
+    <Button
+        android:id="@+id/btn_enlace_inscripcion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:text="Editar Enlace"
+        app:layout_constraintEnd_toEndOf="@+id/txt_enlace"
+        app:layout_constraintHorizontal_bias="0.527"
+        app:layout_constraintStart_toStartOf="@+id/txt_enlace"
+        app:layout_constraintTop_toBottomOf="@+id/txt_enlace" />
 
-            <Button
-                android:id="@+id/btn_rv_individual"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="400dp"
-                android:layout_height="50dp"
-                android:layout_marginEnd="5dp"
-                android:background="@color/cardview_shadow_end_color"
-                android:fontFamily="@font/audiowide"
-                android:text="@string/individual"
-                android:textAlignment="inherit"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <Button
-                android:id="@+id/btn_rv_equipos"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="400dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="5dp"
-                android:background="@color/cardview_shadow_end_color"
-                android:fontFamily="@font/audiowide"
-                android:text="@string/equipos"
-                android:textAlignment="inherit"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                tools:ignore="TextContrastCheck" />
-        </LinearLayout>
-    </HorizontalScrollView>
+    <TextView
+        android:id="@+id/txt_enlace"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="16dp"
+        android:autoLink="web"
+        android:fontFamily="@font/audiowide"
+        android:gravity="center"
+        android:text="@string/enlace_inscripcion"
+        android:textColor="@color/teal_700"
+        android:textColorLink="@color/teal_700"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/textView16"
+        app:layout_constraintStart_toStartOf="@+id/textView16"
+        app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -42,5 +42,6 @@
     <string name="contactodev">marcoaperea10@gmail.com</string>
     <string name="nombre_piloto_perfil">Nombre Piloto</string>
     <string name="nickname_piloto_perfil">Nickname</string>
+    <string name="enlace_inscripcion">Enlace inscripcion</string>
 
 </resources>

@@ -18,6 +18,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class ActivityNuevaSancion extends AppCompatActivity {
 
     EditText sancion_eq_pi;
+    EditText sancion_piloto;
     EditText circuito_sancion;
     EditText tiempo_sancion;
     EditText descripcion_sancion;
@@ -27,7 +28,8 @@ public class ActivityNuevaSancion extends AppCompatActivity {
     private FirebaseFirestore firestoredb;
 
     //valores a guardar
-    private String sancionEquipoPiloto;
+    private String sancionEquipo;
+    private String sancionPiloto;
     private String sancionCircuito;
     private String sancionTiempo;
     private String sancionDescripcion;
@@ -39,6 +41,7 @@ public class ActivityNuevaSancion extends AppCompatActivity {
         setContentView(R.layout.activity_nueva_sancion);
 
         sancion_eq_pi = (EditText) findViewById(R.id.edt_sancion_equiPilo);
+        sancion_piloto = (EditText) findViewById(R.id.edt_sancion_piloto);
         circuito_sancion = (EditText) findViewById(R.id.edt_circuito_sancion);
         tiempo_sancion = (EditText) findViewById(R.id.edt_tiempo_sancion);
         descripcion_sancion = (EditText) findViewById(R.id.edt_descripcion_sancion);
@@ -49,15 +52,16 @@ public class ActivityNuevaSancion extends AppCompatActivity {
         crearSancion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sancionEquipoPiloto = sancion_eq_pi.getText().toString();
+                sancionEquipo = sancion_eq_pi.getText().toString();
+                sancionPiloto = sancion_piloto.getText().toString();
                 sancionCircuito = circuito_sancion.getText().toString();
                 sancionTiempo = tiempo_sancion.getText().toString();
                 sancionDescripcion = descripcion_sancion.getText().toString();
                 sancionSala = sala_carrera.getText().toString();
 
-                if(!sancionEquipoPiloto.isEmpty() && !sancionCircuito.isEmpty() && !sancionTiempo.isEmpty() && !sancionDescripcion.isEmpty() && !sancionSala.isEmpty()){
+                if(!sancionEquipo.isEmpty() && !sancionPiloto.isEmpty() && !sancionCircuito.isEmpty() && !sancionTiempo.isEmpty() && !sancionDescripcion.isEmpty() && !sancionSala.isEmpty()){
 
-                    Sanciones sanciones = new Sanciones(sancionEquipoPiloto,sancionCircuito, sancionTiempo, sancionDescripcion, sancionSala);
+                    Sanciones sanciones = new Sanciones(sancionEquipo, sancionPiloto,sancionCircuito, sancionTiempo, sancionDescripcion, sancionSala);
 
                     firestoredb.collection("Sanciones").add(sanciones).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override

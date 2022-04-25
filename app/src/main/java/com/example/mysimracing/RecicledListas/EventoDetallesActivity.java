@@ -12,6 +12,7 @@ import com.example.mysimracing.AjustesCampeonatoActivity;
 import com.example.mysimracing.NormativaActivity;
 import com.example.mysimracing.OrganizadorActivity;
 import com.example.mysimracing.R;
+import com.example.mysimracing.RecyclerSanciones.ActivitySanciones;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.mikhaellopez.circularimageview.CircularImageView;
@@ -47,7 +48,6 @@ public class EventoDetallesActivity extends AppCompatActivity {
         btn_clasificacion = findViewById(R.id.btn_clasificacion);
         btn_calendario = findViewById(R.id.btn_calendario);
         btn_configuracion = findViewById(R.id.btn_config);
-        btn_cerrar = findViewById(R.id.btn_cerrar);
         img_campeonato = findViewById(R.id.imageView8);
 
         txt_nombre_campeonato.setText(getIntent().getStringExtra("Nombre Campeonato: ").toString());
@@ -74,14 +74,12 @@ public class EventoDetallesActivity extends AppCompatActivity {
             }
         });
 
-        btn_cerrar.setOnClickListener(new View.OnClickListener() {
+        btn_sanciones.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), OrganizadorActivity.class));
-                finish();
+                startActivity(new Intent( EventoDetallesActivity.this, ActivitySanciones.class));
             }
         });
-
     }
 
 }
