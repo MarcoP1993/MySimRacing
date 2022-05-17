@@ -43,5 +43,9 @@
     <string name="nombre_piloto_perfil">Nombre Piloto</string>
     <string name="nickname_piloto_perfil">Nickname</string>
     <string name="enlace_inscripcion">Enlace inscripcion</string>
+    <string name="inscribirse">Inscribirse</string>
+    <string name="nombre_inscripcion">Nombre</string>
+    <string name="nickname_inscripcion">Nickname</string>
+    <string name="correo_example_com">correo@example.com</string>
 
 </resources>

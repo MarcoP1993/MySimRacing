@@ -1,23 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="10dp"
     android:orientation="vertical">
 
     <EditText
-        android:id="@+id/enlaceweb"
+        android:id="@+id/nombre_inscripcion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="http://enclaceweb.com" />
+        android:hint="@string/nombre_inscripcion"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:textColor="@color/black"
+        android:importantForAutofill="no" />
+
+    <EditText
+        android:id="@+id/nick_inscripcion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/nickname_inscripcion"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:textColor="@color/black" />
+
+    <EditText
+        android:id="@+id/correo_inscripcion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/correo_example_com"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:textColor="@color/black"
+        tools:ignore="TextContrastCheck" />
 
     <Button
-        android:id="@+id/btn_crear_enlace"
-        android:layout_width="100dp"
+        android:id="@+id/btn_crear_inscripcion"
+        android:layout_width="130dp"
         android:layout_height="50dp"
-        android:layout_marginLeft="200dp"
-        android:layout_marginTop="40dp"
-        android:text="Crear" />
+        android:layout_marginStart="130dp"
+        android:text="@string/inscribirse" />
 
-
-</RelativeLayout>
+</LinearLayout>
