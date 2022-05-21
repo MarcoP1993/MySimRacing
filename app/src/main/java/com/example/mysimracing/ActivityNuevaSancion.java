@@ -46,6 +46,7 @@ public class ActivityNuevaSancion extends AppCompatActivity {
         tiempo_sancion = (EditText) findViewById(R.id.edt_tiempo_sancion);
         descripcion_sancion = (EditText) findViewById(R.id.edt_descripcion_sancion);
         sala_carrera = (EditText) findViewById(R.id.edt_sala_sancion);
+        crearSancion = (Button) findViewById(R.id.btn_aceptar_sancion);
 
         firestoredb = FirebaseFirestore.getInstance();
 
@@ -68,6 +69,7 @@ public class ActivityNuevaSancion extends AppCompatActivity {
                         public void onSuccess(DocumentReference documentReference) {
 
                             Toast.makeText(ActivityNuevaSancion.this, "Sancion creada correctamente", Toast.LENGTH_SHORT).show();
+                            finish();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override

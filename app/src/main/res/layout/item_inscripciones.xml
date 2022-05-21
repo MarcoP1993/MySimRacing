@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardBackgroundColor="@color/cardview_shadow_start_color">
+    android:layout_marginBottom="2dp"
+    android:hapticFeedbackEnabled="false"
+    app:cardBackgroundColor="?attr/colorError"
+    app:cardCornerRadius="8dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,8 +23,12 @@
                 android:id="@+id/nombre_ins"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:background="@android:drawable/editbox_background"
                 android:fontFamily="@font/audiowide"
                 android:text="Nombre"
+                android:textAlignment="center"
+                android:textAllCaps="true"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -32,21 +40,32 @@
 
                 <TextView
                     android:id="@+id/nick_ins"
-                    android:layout_width="200dp"
+                    android:layout_width="130dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:background="@android:drawable/editbox_background"
                     android:fontFamily="@font/audiowide"
+                    android:gravity="center_vertical"
                     android:text="Nick"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
                     android:textColor="@color/black"
-                    android:textStyle="bold" />
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    tools:ignore="RtlCompat" />
 
                 <TextView
                     android:id="@+id/correo_ins"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@android:drawable/editbox_background"
                     android:fontFamily="@font/audiowide"
+                    android:gravity="center_vertical"
                     android:text="Correo"
+                    android:textAlignment="center"
                     android:textColor="@color/black"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    tools:ignore="RtlCompat" />
             </LinearLayout>
 
         </LinearLayout>
