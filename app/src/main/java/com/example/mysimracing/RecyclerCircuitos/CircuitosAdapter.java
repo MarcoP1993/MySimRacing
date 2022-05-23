@@ -28,17 +28,18 @@ public class CircuitosAdapter extends RecyclerView.Adapter<CircuitosAdapter.View
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CircuitosAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_circuitos,parent, false);
+        View v = LayoutInflater.from(c).inflate(R.layout.item_circuitos,parent,false);
 
         return new ViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CircuitosAdapter.ViewHolder holder, int position) {
 
         Circuitos circuitos = listaCircuitos.get(position);
+
         holder.nombreCircuito.setText("Circuito: " + circuitos.getNombre());
         holder.categoriaCoche.setText("Categoria: " + circuitos.getCategoria());
         holder.diaCarrera.setText("Dia Carrera: " + circuitos.getDiaCarrera());
@@ -57,7 +58,7 @@ public class CircuitosAdapter extends RecyclerView.Adapter<CircuitosAdapter.View
         return listaCircuitos.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imagen_rv;
         TextView nombreCircuito, categoriaCoche, diaCarrera, horaCarrera;

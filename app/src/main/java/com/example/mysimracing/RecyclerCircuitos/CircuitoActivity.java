@@ -32,13 +32,11 @@ public class CircuitoActivity extends AppCompatActivity {
     FirebaseFirestore firestore;
     FirebaseStorage storage;
 
-    RecyclerView rv_circuitos;
-    CircuitosAdapter circuitosAdapter;
-    ArrayList<Circuitos> listaCircuitos;
+    private RecyclerView rv_circuitos;
+    private CircuitosAdapter circuitosAdapter;
+    private ArrayList<Circuitos> listaCircuitos;
 
-    Button btn_nuevo_circuito;
-
-    SwipeRefreshLayout swipeCircuitos;
+    private Button btn_nuevo_circuito;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,16 +45,19 @@ public class CircuitoActivity extends AppCompatActivity {
 
         btn_nuevo_circuito = findViewById(R.id.btn_nuevo_circuito);
 
+        rv_circuitos = (RecyclerView) findViewById(R.id.rv_circuitos);
+        rv_circuitos.setHasFixedSize(true);
+        rv_circuitos.setLayoutManager(new LinearLayoutManager(this));
+
         firestore = FirebaseFirestore.getInstance();
         storage = FirebaseStorage.getInstance();
 
-        rv_circuitos = (RecyclerView) findViewById(R.id.rv_circuitos);
-        rv_circuitos.setLayoutManager(new LinearLayoutManager(this));
-
-        listaCircuitos = new ArrayList<>();
+        listaCircuitos = new ArrayList<Circuitos>();
         circuitosAdapter = new CircuitosAdapter(CircuitoActivity.this, listaCircuitos);
 
         rv_circuitos.setAdapter(circuitosAdapter);
+
+        ListaCircuitos();
 
         btn_nuevo_circuito.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,38 +66,30 @@ public class CircuitoActivity extends AppCompatActivity {
             }
         });
 
-        swipeCircuitos = findViewById(R.id.swipe_circuitos);
-        swipeCircuitos.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                listaCircuitos.clear();
-                firestore.collection("Circuitos").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
-                        for (DocumentSnapshot camp:list) {
-                            Circuitos obj=camp.toObject(Circuitos.class);
-                            listaCircuitos.add(obj);
-                        }
-                        circuitosAdapter.notifyDataSetChanged();
-                        swipeCircuitos.setRefreshing(false);
 
-                    }
-                });
-            }
-        });
 
-        firestore.collection("Circuitos").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+    }
+
+    private void ListaCircuitos() {
+
+        firestore.collection("Circuitos").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
-                for (DocumentSnapshot camp:list) {
-                    Circuitos obj=camp.toObject(Circuitos.class);
-                    listaCircuitos.add(obj);
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+
+                if(error !=null){
+
+                    Log.e("Firestore Error", error.getMessage());
+                    return;
                 }
-                circuitosAdapter.notifyDataSetChanged();
-                //swipeCircuitos.setRefreshing(false);
 
+                for (DocumentChange dc : value.getDocumentChanges()){
+
+                    if (dc.getType() == DocumentChange.Type.ADDED){
+
+                        listaCircuitos.add(dc.getDocument().toObject(Circuitos.class));
+                    }
+                    circuitosAdapter.notifyDataSetChanged();
+                }
             }
         });
 

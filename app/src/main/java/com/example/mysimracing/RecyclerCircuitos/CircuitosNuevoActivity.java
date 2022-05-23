@@ -28,7 +28,7 @@ import com.google.firebase.storage.UploadTask;
 
 public class CircuitosNuevoActivity extends AppCompatActivity {
 
-    FirebaseFirestore firestore;
+    private FirebaseFirestore firestore;
     FirebaseStorage storage;
     EditText nombre, pais, dia, hora, categoria;
     ImageButton img_circuito;
@@ -39,11 +39,11 @@ public class CircuitosNuevoActivity extends AppCompatActivity {
     Uri imagenUrl = null;
 
     //valores a guardar
-    String nombreCircuito;
-    String paisCircuito;
-    String diaCarrera;
-    String horaCarrera;
-    String categoriaCoche;
+    private String nombreCircuito;
+    private String paisCircuito;
+    private String diaCarrera;
+    private String horaCarrera;
+    private String categoriaCoche;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +60,7 @@ public class CircuitosNuevoActivity extends AppCompatActivity {
         categoria = findViewById(R.id.edt_cat_coche);
         img_circuito = findViewById(R.id.img_circuito);
         btn_insertar_circuito = findViewById(R.id.btn_crear_circuito);
-        progressDialog= new ProgressDialog(this);
+
 
         img_circuito.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,16 +84,13 @@ public class CircuitosNuevoActivity extends AppCompatActivity {
     btn_insertar_circuito.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            nombreCircuito = nombre.getText().toString().trim();
-            paisCircuito = pais.getText().toString().trim();
-            diaCarrera = dia.getText().toString().trim();
-            horaCarrera = hora.getText().toString().trim();
-            categoriaCoche = categoria.getText().toString().trim();
+            nombreCircuito = nombre.getText().toString();
+            paisCircuito = pais.getText().toString();
+            diaCarrera = dia.getText().toString();
+            horaCarrera = hora.getText().toString();
+            categoriaCoche = categoria.getText().toString();
 
             if(!(nombreCircuito.isEmpty() && paisCircuito.isEmpty() && diaCarrera.isEmpty() && horaCarrera.isEmpty() && categoriaCoche.isEmpty() && imagenUrl!=null)){
-
-                progressDialog.setTitle("Creando...");
-                progressDialog.show();
 
                 StorageReference filepath = storage.getReference().child("ImagenCircuito").child(imagenUrl.getLastPathSegment());
                 filepath.putFile(imagenUrl).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -115,7 +112,8 @@ public class CircuitosNuevoActivity extends AppCompatActivity {
                                     public void onSuccess(DocumentReference documentReference) {
 
                                         Toast.makeText(CircuitosNuevoActivity.this, "Circuito creado correctamente", Toast.LENGTH_SHORT).show();
-                                        finish();
+                                        Intent intent = new Intent(CircuitosNuevoActivity.this, CircuitoActivity.class);
+                                        startActivity(intent);
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override

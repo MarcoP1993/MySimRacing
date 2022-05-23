@@ -32,10 +32,6 @@ public class ActivitySanciones extends AppCompatActivity {
     FirebaseFirestore firestoredb;
     ProgressDialog progressDialog;
 
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
