@@ -12,6 +12,7 @@ import com.example.mysimracing.AjustesCampeonatoActivity;
 import com.example.mysimracing.NormativaActivity;
 import com.example.mysimracing.OrganizadorActivity;
 import com.example.mysimracing.R;
+import com.example.mysimracing.RecyclerCircuitos.CircuitoActivity;
 import com.example.mysimracing.RecyclerSanciones.ActivitySanciones;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -78,6 +79,13 @@ public class EventoDetallesActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent( EventoDetallesActivity.this, ActivitySanciones.class));
+            }
+        });
+
+        btn_calendario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(EventoDetallesActivity.this, CircuitoActivity.class));
             }
         });
     }

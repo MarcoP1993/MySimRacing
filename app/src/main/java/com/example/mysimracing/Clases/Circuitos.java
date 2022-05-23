@@ -11,12 +11,12 @@ public class Circuitos implements Serializable {
     private String categoria;
     private String horaCarrera;
     private String diaCarrera;
-    private Bitmap imagenCircuito;
+    private String imagenCircuito;
 
     public Circuitos() {
     }
 
-    public Circuitos(String nombre, String pais, String categoria, String horaCarrera, String diaCarrera, Bitmap imagenCircuito) {
+    public Circuitos(String nombre, String pais, String categoria, String horaCarrera, String diaCarrera, String imagenCircuito) {
         this.nombre = nombre;
         this.pais = pais;
         this.categoria = categoria;
@@ -73,11 +73,11 @@ public class Circuitos implements Serializable {
         this.diaCarrera = diaCarrera;
     }
 
-    public Bitmap getImagenCircuito() {
+    public String getImagenCircuito() {
         return imagenCircuito;
     }
 
-    public void setImagenCircuito(Bitmap imagenCircuito) {
+    public void setImagenCircuito(String imagenCircuito) {
         this.imagenCircuito = imagenCircuito;
     }
 
