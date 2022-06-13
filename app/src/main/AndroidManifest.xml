@@ -14,13 +14,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialComponents.Light.DarkActionBar" >
         <activity
+            android:name=".RecyclerEquipos.NuevoEquipoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RecyclerEquipos.ActivityEquipos"
+            android:exported="false" />
+        <activity
             android:name=".RecyclerCircuitos.CircuitoActivity"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name=".RecyclerCircuitos.CircuitosNuevoActivity"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name=".InfoAppActivity"
             android:exported="false" />
@@ -28,7 +34,7 @@
             android:name=".PerfilUsuarioActivity"
             android:exported="false" />
         <activity
-            android:name=".ActivityNuevaSancion"
+            android:name=".RecyclerSanciones.ActivityNuevaSancion"
             android:exported="false" />
         <activity
             android:name=".RecyclerSanciones.ActivitySanciones"
@@ -55,7 +61,8 @@
             android:exported="false" />
         <activity
             android:name=".ActivityJefeEquipo"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.DayNight" />
         <activity
             android:name=".RecicledListas.EventoDetallesActivity"
             android:exported="false" />

@@ -1,5 +1,6 @@
 package com.example.mysimracing;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,10 +13,14 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.mysimracing.Clases.Campeonatos;
+import com.example.mysimracing.RecicledListas.CampeonatosAdapter;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.mikhaellopez.circularimageview.CircularImageView;
 
@@ -25,11 +30,12 @@ import java.util.List;
 public class ActivityPiloto extends AppCompatActivity {
 
     private CircularImageView circularImageView;
-    private String nombre, nick;
+    private String idpiloto;
     private TextView txt_nom_piloto, txt_nick_piloto;
     private RecyclerView rv_campeonato_piloto;
     private CampeonatosAdapter campeonatosAdapter;
     private ArrayList<Campeonatos> campeonatospiloto = null;
+
 
     SwipeRefreshLayout swipeActualizar;
 
@@ -46,6 +52,9 @@ public class ActivityPiloto extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         firestoredb = FirebaseFirestore.getInstance();
+        idpiloto = mAuth.getCurrentUser().getUid();
+
+        datosUsuario();
 
         rv_campeonato_piloto = (RecyclerView) findViewById(R.id.rv_piloto_campeonato);
         rv_campeonato_piloto.setLayoutManager(new LinearLayoutManager(this));
@@ -90,12 +99,19 @@ public class ActivityPiloto extends AppCompatActivity {
             }
         });
 
-        Intent intent = getIntent();
-        nombre = intent.getStringExtra("nombre");
-        nick = intent.getStringExtra("nickname");
-        txt_nom_piloto.setText(nombre);
-        txt_nick_piloto.setText(nick);
 
+    }
+
+    private void datosUsuario() {
+        DocumentReference docRef = firestoredb.collection("Usuarios").document(idpiloto);
+        docRef.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot , @Nullable FirebaseFirestoreException error) {
+                txt_nom_piloto.setText("Nombre: " + documentSnapshot.getString("nombre"));
+                txt_nick_piloto.setText("Nick: " + documentSnapshot.getString("nickname"));
+
+            }
+        });
     }
 
     public boolean onCreateOptionsMenu(Menu menu){

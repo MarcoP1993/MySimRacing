@@ -1,5 +1,6 @@
 package com.example.mysimracing.RecyclerCircuitos;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,16 +12,23 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.mysimracing.Clases.Campeonatos;
 import com.example.mysimracing.Clases.Circuitos;
 import com.example.mysimracing.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 
@@ -31,12 +39,15 @@ public class CircuitoActivity extends AppCompatActivity {
 
     FirebaseFirestore firestore;
     FirebaseStorage storage;
+    CollectionReference reference;
+    FirebaseAuth mAuth;
 
     private RecyclerView rv_circuitos;
     private CircuitosAdapter circuitosAdapter;
-    private ArrayList<Circuitos> listaCircuitos;
+    private ArrayList<Circuitos> circuitosArrayList = new ArrayList<>();
 
     private Button btn_nuevo_circuito;
+    private String idCircuito;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,18 +57,36 @@ public class CircuitoActivity extends AppCompatActivity {
         btn_nuevo_circuito = findViewById(R.id.btn_nuevo_circuito);
 
         rv_circuitos = (RecyclerView) findViewById(R.id.rv_circuitos);
-        rv_circuitos.setHasFixedSize(true);
-        rv_circuitos.setLayoutManager(new LinearLayoutManager(this));
+        rv_circuitos.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        //rv_circuitos.setHasFixedSize(true);
+        //rv_circuitos.setLayoutManager(new LinearLayoutManager(this));
 
         firestore = FirebaseFirestore.getInstance();
         storage = FirebaseStorage.getInstance();
+        reference = firestore.collection("Circuitos");
+        mAuth = FirebaseAuth.getInstance();
+        idCircuito = mAuth.getCurrentUser().getEmail();
 
-        listaCircuitos = new ArrayList<Circuitos>();
-        circuitosAdapter = new CircuitosAdapter(CircuitoActivity.this, listaCircuitos);
-
-        rv_circuitos.setAdapter(circuitosAdapter);
-
-        ListaCircuitos();
+        reference.whereEqualTo("id", idCircuito).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                for (QueryDocumentSnapshot listacircuitos : queryDocumentSnapshots){
+                    //Circuitos circuitos = listacircuitos.toObject(Circuitos.class);
+                    circuitosArrayList.add(listacircuitos.toObject(Circuitos.class));
+                }
+            }
+        }).addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                circuitosAdapter = new CircuitosAdapter(circuitosArrayList, getApplicationContext());
+                rv_circuitos.setAdapter(circuitosAdapter);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(CircuitoActivity.this, "No se han podido cargar los datos", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         btn_nuevo_circuito.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,7 +99,7 @@ public class CircuitoActivity extends AppCompatActivity {
 
     }
 
-    private void ListaCircuitos() {
+    /*private void ListaCircuitos() {
 
         firestore.collection("Circuitos").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
@@ -93,7 +122,7 @@ public class CircuitoActivity extends AppCompatActivity {
             }
         });
 
-    }
+    }*/
 
 
 }

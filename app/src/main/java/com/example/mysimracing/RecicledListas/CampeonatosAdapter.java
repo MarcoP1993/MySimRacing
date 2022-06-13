@@ -1,4 +1,4 @@
-package com.example.mysimracing;
+package com.example.mysimracing.RecicledListas;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -6,21 +6,17 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.mysimracing.Clases.Campeonatos;
-import com.example.mysimracing.RecicledListas.EventoDetallesActivity;
-import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
-import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.example.mysimracing.R;
 import com.mikhaellopez.circularimageview.CircularImageView;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class CampeonatosAdapter extends RecyclerView.Adapter<CampeonatosAdapter.MyViewHolder> {
 
@@ -46,13 +42,12 @@ public class CampeonatosAdapter extends RecyclerView.Adapter<CampeonatosAdapter.
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, @SuppressLint("RecyclerView") final int position) {
 
-
-
         holder.txt_competicion.setText("Nombre Campeonato: " + listaCampeonatos.get(position).getNombreCampeonato());
         holder.txt_juego.setText("Videojuego: " + listaCampeonatos.get(position).getJuego());
         holder.txt_plataforma.setText("Plataforma: " + listaCampeonatos.get(position).getPlataforma());
         holder.txt_fechas.setText("Fecha Campeonato: " + listaCampeonatos.get(position).getRango_fechas());
         //Glide.with(context).load(listaCampeonatos.get(position).getImagen()).into(holder.imagen);
+        Picasso.get().load(listaCampeonatos.get(position).getImagen()).resize(150,150).into(holder.imagen);
 
         holder.txt_competicion.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,7 +80,7 @@ public class CampeonatosAdapter extends RecyclerView.Adapter<CampeonatosAdapter.
             txt_juego = (TextView) itemView.findViewById(R.id.txt_juego);
             txt_plataforma = (TextView) itemView.findViewById(R.id.txt_plataforma);
             txt_fechas = (TextView) itemView.findViewById(R.id.txt_fechas);
-            imagen = itemView.findViewById(R.id.imageView8);
+            imagen = itemView.findViewById(R.id.img_campeonato_item);
 
         }
     }

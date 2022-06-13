@@ -1,6 +1,8 @@
 package com.example.mysimracing.Clases;
 
-public class Inscripciones {
+import java.io.Serializable;
+
+public class Inscripciones implements Serializable {
     String nombre, nick, correo;
 
     public Inscripciones() {

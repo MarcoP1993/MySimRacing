@@ -47,5 +47,7 @@
     <string name="nombre_inscripcion">Nombre</string>
     <string name="nickname_inscripcion">Nickname</string>
     <string name="correo_example_com">correo@example.com</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

@@ -1,5 +1,6 @@
 package com.example.mysimracing.RecicledListas;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -14,6 +15,12 @@ import com.example.mysimracing.OrganizadorActivity;
 import com.example.mysimracing.R;
 import com.example.mysimracing.RecyclerCircuitos.CircuitoActivity;
 import com.example.mysimracing.RecyclerSanciones.ActivitySanciones;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.mikhaellopez.circularimageview.CircularImageView;
@@ -33,6 +40,10 @@ public class EventoDetallesActivity extends AppCompatActivity {
     Button btn_configuracion;
     Button btn_cerrar;
 
+    FirebaseFirestore firestoredb;
+    FirebaseAuth mAuth;
+    String nombreCamp;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +61,12 @@ public class EventoDetallesActivity extends AppCompatActivity {
         btn_calendario = findViewById(R.id.btn_calendario);
         btn_configuracion = findViewById(R.id.btn_config);
         img_campeonato = findViewById(R.id.imageView8);
+        firestoredb = FirebaseFirestore.getInstance();
+
 
         txt_nombre_campeonato.setText(getIntent().getStringExtra("Nombre Campeonato: ").toString());
         txt_fecha_inicio.setText(getIntent().getStringExtra("Fechas Campeonato: ").toString());
+
 
         btn_normativa.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,6 +102,8 @@ public class EventoDetallesActivity extends AppCompatActivity {
                 startActivity(new Intent(EventoDetallesActivity.this, CircuitoActivity.class));
             }
         });
+
+
     }
 
 }

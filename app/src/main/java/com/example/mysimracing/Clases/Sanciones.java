@@ -1,6 +1,8 @@
 package com.example.mysimracing.Clases;
 
-public class Sanciones {
+import java.io.Serializable;
+
+public class Sanciones implements Serializable {
 
     private String equipo;
     private String piloto;

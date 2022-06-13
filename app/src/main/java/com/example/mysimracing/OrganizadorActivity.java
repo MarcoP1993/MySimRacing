@@ -1,6 +1,7 @@
 package com.example.mysimracing;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,38 +15,35 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.mysimracing.Clases.Campeonatos;
-import com.example.mysimracing.RecicledListas.ListaEventosAdapter;
-import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
-import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.example.mysimracing.RecicledListas.CampeonatosAdapter;
+import com.example.mysimracing.RecyclerEquipos.ActivityEquipos;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.mikhaellopez.circularimageview.CircularImageView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class OrganizadorActivity extends AppCompatActivity {
 
     private Button btn_crearCampeonato;
-    private ArrayList<Campeonatos> campeonatos = null;
+    private ArrayList<Campeonatos> campeonatos = new ArrayList<>();
     private RecyclerView rv_campeonatos = null;
     private CampeonatosAdapter adaptadorCampeonatos;
     private CircularImageView circularImageView;
     private TextView nombreOrg;
-    String nombre;
+    String nombrecampeonato;
+    String nombreUser;
 
     SwipeRefreshLayout swipeActualizar;
     
@@ -58,35 +56,39 @@ public class OrganizadorActivity extends AppCompatActivity {
         setContentView(R.layout.activity_organizador);
         mAuth = FirebaseAuth.getInstance();
         firestoredb = FirebaseFirestore.getInstance();
+        nombrecampeonato = mAuth.getCurrentUser().getEmail();
+        nombreUser = mAuth.getCurrentUser().getUid();
 
         btn_crearCampeonato = findViewById(R.id.btn_nuevo_campeonato);
         circularImageView = findViewById(R.id.img_perfil_piloto);
 
         rv_campeonatos = (RecyclerView) findViewById(R.id.rv_campeonatos);
         rv_campeonatos.setLayoutManager(new LinearLayoutManager(this));
-        campeonatos = new ArrayList<>();
+
+        datosUsuario();
 
         adaptadorCampeonatos = new CampeonatosAdapter(campeonatos);
         //adaptadorCampeonatos.notifyDataSetChanged();
         rv_campeonatos.setAdapter(adaptadorCampeonatos);
 
         nombreOrg = findViewById(R.id.txt_nom_organizador);
-        Intent intent = getIntent();
-        nombre = intent.getStringExtra("Nombre");
-        nombreOrg.setText(nombre);
+
+
 
         swipeActualizar = findViewById(R.id.swipeActualizar);
         swipeActualizar.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 campeonatos.clear();
-                firestoredb.collection("Campeonatos").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                firestoredb.collection("Campeonatos").whereEqualTo("id", nombrecampeonato).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                         List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
                         for (DocumentSnapshot camp:list) {
                             Campeonatos obj=camp.toObject(Campeonatos.class);
+                            obj.getId();
                             campeonatos.add(obj);
+
                         }
                         adaptadorCampeonatos.notifyDataSetChanged();
                         swipeActualizar.setRefreshing(false);
@@ -96,17 +98,17 @@ public class OrganizadorActivity extends AppCompatActivity {
             }
         });
 
-        firestoredb.collection("Campeonatos").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        firestoredb.collection("Campeonatos").whereEqualTo("id", nombrecampeonato).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
                 for (DocumentSnapshot camp:list) {
                     Campeonatos obj=camp.toObject(Campeonatos.class);
+                    obj.getId();
                     campeonatos.add(obj);
-
                 }
                 adaptadorCampeonatos.notifyDataSetChanged();
-                //swipeActualizar.setRefreshing(false);
+                swipeActualizar.setRefreshing(false);
 
             }
         });
@@ -124,6 +126,17 @@ public class OrganizadorActivity extends AppCompatActivity {
                 startActivity(new Intent(OrganizadorActivity.this, ActivityNuevoCampeonato.class));
             }
         });
+    }
+
+    private void datosUsuario() {
+            DocumentReference docRef = firestoredb.collection("Usuarios").document(nombreUser);
+            docRef.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+                @Override
+                public void onEvent(@Nullable DocumentSnapshot documentSnapshot , @Nullable FirebaseFirestoreException error) {
+                    nombreOrg.setText("Nombre: " + documentSnapshot.getString("nombre"));
+
+                }
+            });
     }
 
 

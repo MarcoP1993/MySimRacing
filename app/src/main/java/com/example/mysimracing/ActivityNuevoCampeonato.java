@@ -22,6 +22,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.UUID;
+
 public class ActivityNuevoCampeonato extends AppCompatActivity {
 
     EditText nombre_campeonato;
@@ -70,23 +72,24 @@ public class ActivityNuevoCampeonato extends AppCompatActivity {
                 juego = juego_campeonato.getText().toString();
                 plataforma = plataforma_campeonato.getText().toString();
                 tipoCampeonato = tipo_campeonato.getText().toString();
+                id = firebaseAuth.getCurrentUser().getEmail();
 
                     if (!nombreCampeonato.isEmpty() && !juego.isEmpty() && !plataforma.isEmpty() && !tipoCampeonato.isEmpty() && !rango_fechas.isEmpty()) {
 
                         Campeonatos campeonato = new Campeonatos(nombreCampeonato, rango_fechas, juego, plataforma, tipoCampeonato, null, idUsuario);
 
-                        firestoredb.collection("Campeonatos").document().set(campeonato).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        firestoredb.collection("Campeonatos").document(idUsuario).set(campeonato).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
                                 Toast.makeText(ActivityNuevoCampeonato.this, "Campeonato Creado Correctamente", Toast.LENGTH_SHORT).show();
                                 finish();
                             }
                         }).addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(ActivityNuevoCampeonato.this, "Error al crear el campeonato", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(ActivityNuevoCampeonato.this, "Error al crear", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                         finish();
                     }else {
                         Toast.makeText(ActivityNuevoCampeonato.this, "Completa todos los campos", Toast.LENGTH_LONG).show();

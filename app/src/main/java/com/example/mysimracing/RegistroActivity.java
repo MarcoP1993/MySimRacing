@@ -119,7 +119,7 @@ public class RegistroActivity extends AppCompatActivity {
                     Toast.makeText(RegistroActivity.this, "Usuario creado correctamente", Toast.LENGTH_SHORT).show();
                     DocumentReference documentReference = firestoredb.collection("Usuarios").document(user.getUid());
 
-                    Usuarios usuarios = new Usuarios(nombre,nickname,correo, contraseña, role);
+                    Usuarios usuarios = new Usuarios(nombre,nickname,correo, contraseña, role, null);
                     //EventosTorneo eventos = new EventosTorneo("nombre 1", "seseña", "ps4", false);
                     //creamos un mapa de valores
                     /*Map<String, Object> user = new HashMap<>();
@@ -153,7 +153,7 @@ public class RegistroActivity extends AppCompatActivity {
 
             role = "Organizador";
             Toast.makeText(this,"Has seleccionado Organizador",Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(getApplicationContext(), OrganizadorActivity.class);
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
             String nombre = txt_nombre.getText().toString();
             intent.putExtra("Nombre", nombre);
             startActivity(intent);
@@ -162,7 +162,7 @@ public class RegistroActivity extends AppCompatActivity {
 
             role = "Jefe de Equipo";
             Toast.makeText(this,"Has seleccionado Jefe de equipo",Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(getApplicationContext(), ActivityJefeEquipo.class);
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
             String nombre = txt_nombre.getText().toString();
             intent.putExtra("Nombre", nombre);
             startActivity(intent);
@@ -171,7 +171,7 @@ public class RegistroActivity extends AppCompatActivity {
 
             role = "Piloto";
             Toast.makeText(this,"Has seleccionado Piloto",Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(getApplicationContext(), ActivityPiloto.class);
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
             String nombre = txt_nombre.getText().toString();
             String nick = txt_nickname.getText().toString();
             intent.putExtra("Nombre", nombre);

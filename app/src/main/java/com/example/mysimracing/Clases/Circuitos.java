@@ -6,6 +6,7 @@ import java.io.Serializable;
 
 public class Circuitos implements Serializable {
 
+    private String id;
     private String nombre;
     private String pais;
     private String categoria;
@@ -16,7 +17,8 @@ public class Circuitos implements Serializable {
     public Circuitos() {
     }
 
-    public Circuitos(String nombre, String pais, String categoria, String horaCarrera, String diaCarrera, String imagenCircuito) {
+    public Circuitos(String id, String nombre, String pais, String categoria, String horaCarrera, String diaCarrera, String imagenCircuito) {
+        this.id = id;
         this.nombre = nombre;
         this.pais = pais;
         this.categoria = categoria;
@@ -79,6 +81,14 @@ public class Circuitos implements Serializable {
 
     public void setImagenCircuito(String imagenCircuito) {
         this.imagenCircuito = imagenCircuito;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     @Override

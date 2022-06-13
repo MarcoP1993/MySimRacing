@@ -1,19 +1,5 @@
 package com.example.mysimracing;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.os.Bundle;
-import android.widget.Toast;
-
-import com.example.mysimracing.RecicledListas.ListaEventosAdapter;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
 /*
 public class MainActivity extends AppCompatActivity implements Serializable {
 

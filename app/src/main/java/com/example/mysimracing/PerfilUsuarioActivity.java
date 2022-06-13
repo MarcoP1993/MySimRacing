@@ -57,6 +57,7 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
         actualizar_perfil = (Button) findViewById(R.id.btn_act_perfil);
         nombre_perfil = (TextView) findViewById(R.id.txt_nombre_perfil);
         nick_perfil = (TextView) findViewById(R.id.txt_nick_perfil);
+        imagenUsuario = (CircularImageView) findViewById(R.id.img_perfil);
 
         firebaseAuth = FirebaseAuth.getInstance();
         final FirebaseUser usuario = firebaseAuth.getCurrentUser();
@@ -70,6 +71,7 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot , @Nullable FirebaseFirestoreException error) {
                 nombre_perfil.setText("Nombre: " + documentSnapshot.getString("nombre"));
                 nick_perfil.setText("Nick: " + documentSnapshot.getString("nickname"));
+
             }
         });
 

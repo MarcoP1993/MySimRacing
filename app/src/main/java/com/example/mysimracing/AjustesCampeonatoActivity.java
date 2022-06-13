@@ -60,6 +60,8 @@ public class AjustesCampeonatoActivity extends AppCompatActivity {
     private String idUsuario;
     private Campeonatos campeonatos;
 
+    DocumentSnapshot documentSnapshot;
+
     private FirebaseFirestore firestoredb = FirebaseFirestore.getInstance();
 
     private static final int GALERIA_IMAGENES = 1;
@@ -87,6 +89,7 @@ public class AjustesCampeonatoActivity extends AppCompatActivity {
 
         btn_actualizar = (Button) findViewById(R.id.btn_actualizar_datos);
         btn_cambio_imagen = (Button) findViewById(R.id.btn_cambiar_imagen);
+
         edt_nombre_campeonato = (EditText) findViewById(R.id.edt_ActulizarNomCamp);
         actualizarImagenCampeonato = (CircularImageView) findViewById(R.id.img_campeonato);
         firebaseAuth = FirebaseAuth.getInstance();
@@ -96,6 +99,7 @@ public class AjustesCampeonatoActivity extends AppCompatActivity {
         progressDialog.setMessage("Espere...");
 
         idUsuario = firebaseAuth.getCurrentUser().getEmail();
+
 
         btn_cambio_imagen.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,6 +120,7 @@ public class AjustesCampeonatoActivity extends AppCompatActivity {
                 }
             }
         });
+
 
         Intent intent = getIntent();
         if(intent !=null){
@@ -154,15 +159,7 @@ public class AjustesCampeonatoActivity extends AppCompatActivity {
         builder.show();
     }
 
-        /*Intent getIntent = new Intent(Intent.ACTION_GET_CONTENT);
-        getIntent.setType("image/*");
 
-        Intent pickIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        pickIntent.setType("image/*");
-
-        Intent chooserIntent = Intent.createChooser(getIntent, "Selecciona una imagen");
-        chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[] {pickIntent});
-        startActivityForResult(chooserIntent, GALERIA_IMAGENES);*/
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -171,8 +168,6 @@ public class AjustesCampeonatoActivity extends AppCompatActivity {
             Bitmap bitmap = null;
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imagen_seleccionada);
-                //bitmap.setWidth(150);
-                //bitmap.setHeight(150);
                 actualizarImagenCampeonato.setImageBitmap(bitmap);
 
                 //---------------------------------------------
@@ -181,19 +176,6 @@ public class AjustesCampeonatoActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            //imagen_seleccionada = data.getData();
-            //Bitmap bitmap = null;
-            /*try {
-                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imagen_seleccionada);
-                //bitmap.setWidth(150);
-                //bitmap.setHeight(150);
-                actualizarImagenCampeonato.setImageBitmap(bitmap);
-
-                //---------------------------------------------
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }*/
         }
         if(requestCode == 10 && resultCode == RESULT_OK){
             final Bundle extras = data.getExtras();
@@ -262,6 +244,10 @@ public class AjustesCampeonatoActivity extends AppCompatActivity {
         Campeonatos c = new Campeonatos();
         c.setNombreCampeonato(nombreCampeonato);
         c.setImagen(imagen);
+        /*c.setPlataforma(c.getPlataforma());
+        c.setJuego(c.getJuego());
+        c.setRango_fechas(c.getRango_fechas());
+        c.setTipoCampeonato(c.getTipoCampeonato());*/
 
 
         if(idUsuario !=null){
@@ -276,33 +262,7 @@ public class AjustesCampeonatoActivity extends AppCompatActivity {
                     }
                 }
             });
-        }/*else {
-            firestoredb.collection("Campeonatos").document(idUsuario).set(campeonato).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    Toast.makeText(AjustesCampeonatoActivity.this, "Creado Correctamente", Toast.LENGTH_SHORT).show();
-                    progressDialog.dismiss();
-                    finish();
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(AjustesCampeonatoActivity.this, "Error al crear", Toast.LENGTH_SHORT).show();
-                }
-            });*/
-            /*firestoredb.collection("Campeonatos").add(campeonato).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                @Override
-                public void onSuccess(DocumentReference documentReference) {
-                    Toast.makeText(AjustesCampeonatoActivity.this, "Creado Correctamente", Toast.LENGTH_SHORT).show();
-                    progressDialog.dismiss();
-                    finish();
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(AjustesCampeonatoActivity.this, "Fallo al crear", Toast.LENGTH_SHORT).show();
-                }
-            });*/
+        }
         }
 
 

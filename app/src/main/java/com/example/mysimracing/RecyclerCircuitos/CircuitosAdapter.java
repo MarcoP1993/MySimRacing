@@ -1,6 +1,7 @@
 package com.example.mysimracing.RecyclerCircuitos;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,11 @@ public class CircuitosAdapter extends RecyclerView.Adapter<CircuitosAdapter.View
         this.listaCircuitos = listaCircuitos;
     }
 
+    public CircuitosAdapter(ArrayList<Circuitos> circuitosArrayList, Context applicationContext) {
+        this.listaCircuitos = circuitosArrayList;
+        c = applicationContext;
+    }
+
     @NonNull
     @Override
     public CircuitosAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -37,19 +43,16 @@ public class CircuitosAdapter extends RecyclerView.Adapter<CircuitosAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull CircuitosAdapter.ViewHolder holder, int position) {
-
-        Circuitos circuitos = listaCircuitos.get(position);
-
-        holder.nombreCircuito.setText("Circuito: " + circuitos.getNombre());
-        holder.categoriaCoche.setText("Categoria: " + circuitos.getCategoria());
-        holder.diaCarrera.setText("Dia Carrera: " + circuitos.getDiaCarrera());
-        holder.horaCarrera.setText("Hora Carrera: " + circuitos.getHoraCarrera());
+        holder.nombreCircuito.setText("Circuito: " + listaCircuitos.get(position).getNombre());
+        holder.categoriaCoche.setText("Categoria: " + listaCircuitos.get(position).getCategoria());
+        holder.diaCarrera.setText("Dia Carrera: " + listaCircuitos.get(position).getDiaCarrera());
+        holder.horaCarrera.setText("Hora Carrera: " + listaCircuitos.get(position).getHoraCarrera());
 
         //cargar imagen al recyclerview con Picasso
-
-        String imageURI=null;
-        imageURI = circuitos.getImagenCircuito();
-        Picasso.get().load(imageURI).into(holder.imagen_rv);
+        Picasso.get().load(listaCircuitos.get(position).getImagenCircuito()).resize(150,150).into(holder.imagen_rv);
+        //String imageURI=null;
+        //imageURI = listaCircuitos.get(position).getImagenCircuito();
+        //Picasso.get().load(imageURI).resize(200,200).into(holder.imagen_rv);
 
     }
 

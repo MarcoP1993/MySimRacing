@@ -1,4 +1,4 @@
-package com.example.mysimracing;
+package com.example.mysimracing.RecyclerSanciones;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.mysimracing.Clases.Sanciones;
+import com.example.mysimracing.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;

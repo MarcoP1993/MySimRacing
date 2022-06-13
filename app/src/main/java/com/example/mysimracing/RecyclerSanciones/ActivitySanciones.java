@@ -12,7 +12,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.mysimracing.ActivityNuevaSancion;
 import com.example.mysimracing.Clases.Sanciones;
 import com.example.mysimracing.R;
 import com.google.firebase.firestore.DocumentChange;

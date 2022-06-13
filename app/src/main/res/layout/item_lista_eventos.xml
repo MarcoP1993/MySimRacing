@@ -8,7 +8,7 @@
     android:paddingBottom="4dp">
 
     <com.mikhaellopez.circularimageview.CircularImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/img_campeonato_item"
         android:layout_width="142dp"
         android:layout_height="160dp"
         android:layout_marginStart="15dp"

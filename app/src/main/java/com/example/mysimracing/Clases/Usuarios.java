@@ -11,6 +11,7 @@ public class Usuarios implements Serializable {
      String correo;
      String password;
      String role;
+     String fotoUsuario;
 
     public Usuarios() {
     }
@@ -21,6 +22,15 @@ public class Usuarios implements Serializable {
         this.correo = correo;
         this.password = password;
         this.role = role;
+    }
+
+    public Usuarios(String nombre, String nickname, String correo, String password, String role, String fotoUsuario) {
+        this.nombre = nombre;
+        this.nickname = nickname;
+        this.correo = correo;
+        this.password = password;
+        this.role = role;
+        this.fotoUsuario = fotoUsuario;
     }
 
     public String getNombre() {
@@ -61,6 +71,14 @@ public class Usuarios implements Serializable {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getFotoUsuario() {
+        return fotoUsuario;
+    }
+
+    public void setFotoUsuario(String fotoUsuario) {
+        this.fotoUsuario = fotoUsuario;
     }
 
     @Override
