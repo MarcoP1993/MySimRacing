@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.mysimracing.Clases.Inscripciones;
+import com.example.mysimracing.Clases.Usuarios;
 import com.example.mysimracing.R;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -32,6 +33,7 @@ public class InscripcionesActivity extends AppCompatActivity {
     RecyclerView rv_inscrpciones;
     InscripcionesAdapter ins_adapter;
 
+    Usuarios usuarios;
 
     private FirebaseFirestore firestore;
 
@@ -58,6 +60,7 @@ public class InscripcionesActivity extends AppCompatActivity {
         //inflar custom_dialog
         View view = getLayoutInflater().inflate(R.layout.custom_dialog, null);
         firestore = FirebaseFirestore.getInstance();
+
 
         EditText nombre, nick, correo;
         nombre = view.findViewById(R.id.nombre_inscripcion);
@@ -122,6 +125,8 @@ public class InscripcionesActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         ins_adapter.startListening();
+
+
     }
 
     @Override

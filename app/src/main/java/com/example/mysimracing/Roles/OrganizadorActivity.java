@@ -86,7 +86,7 @@ public class OrganizadorActivity extends AppCompatActivity {
                         List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
                         for (DocumentSnapshot camp:list) {
                             Campeonatos obj=camp.toObject(Campeonatos.class);
-                            obj.getId();
+                            obj.setId(camp.getId());
                             campeonatos.add(obj);
 
                         }

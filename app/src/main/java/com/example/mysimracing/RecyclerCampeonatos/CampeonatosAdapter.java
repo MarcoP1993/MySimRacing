@@ -52,10 +52,12 @@ public class CampeonatosAdapter extends RecyclerView.Adapter<CampeonatosAdapter.
         holder.txt_competicion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Campeonatos campeonatos = listaCampeonatos.get(position);
                 Intent intent = new Intent(holder.txt_competicion.getContext(), EventoDetallesActivity.class);
-                intent.putExtra("Nombre Campeonato: ", "Nombre Campeonato: " + listaCampeonatos.get(position).getNombreCampeonato());
+                intent.putExtra("nombreCampeonato", campeonatos);
+                /*intent.putExtra("Nombre Campeonato: ", "Nombre Campeonato: " + "\n" + listaCampeonatos.get(position).getNombreCampeonato());
                 intent.putExtra("Fechas Campeonato: ", "Fecha Campeonato: " + "\n" + listaCampeonatos.get(position).getRango_fechas());
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);*/
                 holder.txt_competicion.getContext().startActivity(intent);
                 v.setOnClickListener(this);
             }

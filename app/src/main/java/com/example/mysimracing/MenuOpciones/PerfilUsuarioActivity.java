@@ -1,7 +1,5 @@
 package com.example.mysimracing.MenuOpciones;
 
-import static com.example.mysimracing.Authentication.RegistroActivity.TAG;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,11 +8,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,17 +18,15 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.example.mysimracing.Authentication.LoginActivity;
+import com.example.mysimracing.Clases.Usuarios;
 import com.example.mysimracing.R;
-import com.example.mysimracing.RecyclerCircuitos.CircuitosNuevoActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -45,8 +38,8 @@ import com.google.firebase.storage.UploadTask;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PerfilUsuarioActivity extends AppCompatActivity {
 
@@ -56,14 +49,14 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
     private TextView nombre_perfil, nick_perfil;
     private CircularImageView imagenUsuario;
     private RadioGroup rg_roles_perfil = null;
-    private RadioButton rb_organizador_perfil;
-    private RadioButton rb_jefe_equipo_perfil;
-    private RadioButton rb_piloto_perfil;
+    private RadioButton rb_organizador_perfil_act;
+    private RadioButton rb_jefe_equipo_perfil_act;
+    private RadioButton rb_piloto_perfil_act;
 
     private Button actualizar_perfil, btn_eliminar_usuario;
 
     private String idUsuario;
-    Uri imagenUrl = null;
+    private Uri imagenUrl;
 
     private FirebaseAuth firebaseAuth;
     private FirebaseFirestore firestoredb;
@@ -74,6 +67,7 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
     private String nombre = "";
     private String nickname = "";
     private String correo = "";
+    private String contrasena = "";
     private String role = "";
 
 
@@ -82,12 +76,12 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil_usuario);
 
-        edt_nombre_perfil = (EditText) findViewById(R.id.edt_nombre);
-        edt_nick_perfil = (EditText) findViewById(R.id.edt_Nickname);
-        rg_roles_perfil = (RadioGroup) findViewById(R.id.radio_group_roles_perfil);
-        rb_organizador_perfil = (RadioButton) findViewById(R.id.Rb_organizador_perfil);
-        rb_jefe_equipo_perfil = (RadioButton) findViewById(R.id.Rb_jefe_equipo_perfil);
-        rb_piloto_perfil = (RadioButton) findViewById(R.id.Rb_piloto_perfil);
+        edt_nombre_perfil = (EditText) findViewById(R.id.edt_nombrePerfil);
+        edt_nick_perfil = (EditText) findViewById(R.id.edt_NicknamePerfil);
+        rg_roles_perfil = (RadioGroup) findViewById(R.id.rg_roles_perfil);
+        rb_organizador_perfil_act = (RadioButton) findViewById(R.id.rb_orga_perfil);
+        rb_jefe_equipo_perfil_act = (RadioButton) findViewById(R.id.rb_jefe_perfil);
+        rb_piloto_perfil_act = (RadioButton) findViewById(R.id.rb_pilo_perfil);
         actualizar_perfil = (Button) findViewById(R.id.btn_act_perfil);
         nombre_perfil = (TextView) findViewById(R.id.txt_nombre_perfil);
         nick_perfil = (TextView) findViewById(R.id.txt_nick_perfil);
@@ -128,7 +122,7 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
         actualizar_perfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                actualizarDatos();
             }
         });
 
@@ -186,12 +180,28 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
         });
     }
 
+    private void actualizarDatos() {
+        nombre = edt_nombre_perfil.getText().toString();
+        nickname = edt_nick_perfil.getText().toString();
+        role = "";
+        if(!(nombre.isEmpty() && nickname.isEmpty())){
+
+            if(!(rb_organizador_perfil_act.isChecked() || rb_jefe_equipo_perfil_act.isChecked() || rb_piloto_perfil_act.isChecked())){
+                Toast.makeText(PerfilUsuarioActivity.this, "Selecciona un rol", Toast.LENGTH_SHORT).show();
+                return;
+            }else {
+                elegirRole();
+                guardardatos();
+            }
+        }else {
+            Toast.makeText(PerfilUsuarioActivity.this, "Rellena todos los campos", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
     public void elegirfoto(View view) {
                 Intent pickIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(pickIntent, 100);
-
-
-
     }
 
     @Override
@@ -224,6 +234,61 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(PerfilUsuarioActivity.this, "Error al subir la foto", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void elegirRole (){
+        int seleccionadoOk = rg_roles_perfil.getCheckedRadioButtonId();
+
+        if(seleccionadoOk == R.id.rb_orga_perfil){
+
+            role = "Organizador";
+            Toast.makeText(this,"Has seleccionado Organizador",Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            String nombre = nombre_perfil.getText().toString();
+            intent.putExtra("Nombre", nombre);
+            startActivity(intent);
+
+        }else if(seleccionadoOk == R.id.rb_jefe_perfil){
+
+            role = "Jefe de Equipo";
+            Toast.makeText(this,"Has seleccionado Jefe de equipo",Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            String nombre = nombre_perfil.getText().toString();
+            intent.putExtra("Nombre", nombre);
+            startActivity(intent);
+
+        }else if (seleccionadoOk == R.id.rb_pilo_perfil){
+
+            role = "Piloto";
+            Toast.makeText(this,"Has seleccionado Piloto",Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            String nombre = nombre_perfil.getText().toString();
+            String nick = nick_perfil.getText().toString();
+            intent.putExtra("Nombre", nombre);
+            intent.putExtra("nickname", nick);
+            startActivity(intent);
+
+        }else {
+            Toast.makeText(PerfilUsuarioActivity.this, "Selecciona un rol", Toast.LENGTH_SHORT).show();
+
+        }
+
+    }
+
+    public void guardardatos(){
+
+        Map<String, Object> user = new HashMap<>();
+        user.put("nombre", nombre);
+        user.put("nickname", nickname);
+        user.put("role", role);
+        user.put("fotoUsuario", imagenUrl);
+
+        firestoredb.collection("Usuarios").document(idUsuario).update(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                Toast.makeText(PerfilUsuarioActivity.this, "Perfil actualizado", Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mysimracing.Authentication.LoginActivity;
+import com.example.mysimracing.Clases.Campeonatos;
 import com.example.mysimracing.MenuOpciones.PerfilUsuarioActivity;
 import com.example.mysimracing.R;
 import com.example.mysimracing.RecyclerCircuitos.CircuitoActivity;
@@ -50,6 +51,7 @@ public class EventoDetallesActivity extends AppCompatActivity {
     private String idUsuario;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,17 +73,20 @@ public class EventoDetallesActivity extends AppCompatActivity {
         firestoredb = FirebaseFirestore.getInstance();
         idUsuario = mAuth.getCurrentUser().getEmail();
 
-        DocumentReference docRef = firestoredb.collection("Usuarios").document(idUsuario);
+        Campeonatos campeonatos = (Campeonatos) getIntent().getSerializableExtra("nombreCampeonato");
+
+        txt_nombre_campeonato.setText("Nombre: " + campeonatos.getNombreCampeonato());
+        txt_fecha_inicio.setText("Fechas: " + campeonatos.getRango_fechas());
+        /*DocumentReference docRef = firestoredb.collection("Usuarios").document(idUsuario);
         docRef.addSnapshotListener(this,new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
                 txt_nombre_campeonato.setText("Nombre Campeonato" + documentSnapshot.getString("nombreCampeonato"));
                 txt_fecha_inicio.setText("Fechas Campeonato" + documentSnapshot.getString("rango_fechas"));
             }
-        });
+        });*/
 
-        //txt_nombre_campeonato.setText(getIntent().getStringExtra("Nombre Campeonato: ").toString());
-        //txt_fecha_inicio.setText(getIntent().getStringExtra("Fechas Campeonato: ").toString());
+
 
 
         btn_normativa.setOnClickListener(new View.OnClickListener() {
@@ -105,7 +110,7 @@ public class EventoDetallesActivity extends AppCompatActivity {
                 builder.setMessage("¿Estas seguro de que quieres eliminar el campeonato?\n " +
                         "No habrá vuelta atrás")
                         .setTitle("Eliminar Campeonato");
-                
+
                 builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -152,6 +157,7 @@ public class EventoDetallesActivity extends AppCompatActivity {
                 startActivity(new Intent(EventoDetallesActivity.this, CircuitoActivity.class));
             }
         });
+
 
 
     }
