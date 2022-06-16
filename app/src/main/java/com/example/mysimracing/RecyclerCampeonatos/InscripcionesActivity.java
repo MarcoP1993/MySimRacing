@@ -1,4 +1,4 @@
-package com.example.mysimracing.RecicledListas;
+package com.example.mysimracing.RecyclerCampeonatos;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;

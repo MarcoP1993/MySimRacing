@@ -1,8 +1,10 @@
-package com.example.mysimracing;
+package com.example.mysimracing.RecyclerCampeonatos;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.mysimracing.R;
 
 public class NormativaActivity extends AppCompatActivity {
 

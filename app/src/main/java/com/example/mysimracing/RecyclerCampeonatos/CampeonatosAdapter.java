@@ -1,4 +1,4 @@
-package com.example.mysimracing.RecicledListas;
+package com.example.mysimracing.RecyclerCampeonatos;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

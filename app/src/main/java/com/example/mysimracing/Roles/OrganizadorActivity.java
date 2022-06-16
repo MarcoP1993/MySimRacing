@@ -1,6 +1,5 @@
-package com.example.mysimracing;
+package com.example.mysimracing.Roles;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,7 +8,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,11 +15,13 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.mysimracing.Clases.Campeonatos;
-import com.example.mysimracing.RecicledListas.CampeonatosAdapter;
-import com.example.mysimracing.RecyclerEquipos.ActivityEquipos;
-import com.google.android.gms.tasks.OnCompleteListener;
+import com.example.mysimracing.MenuOpciones.InfoAppActivity;
+import com.example.mysimracing.Authentication.LoginActivity;
+import com.example.mysimracing.MenuOpciones.PerfilUsuarioActivity;
+import com.example.mysimracing.R;
+import com.example.mysimracing.RecyclerCampeonatos.ActivityNuevoCampeonato;
+import com.example.mysimracing.RecyclerCampeonatos.CampeonatosAdapter;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;

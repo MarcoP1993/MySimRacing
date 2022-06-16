@@ -1,7 +1,6 @@
 package com.example.mysimracing.RecyclerCircuitos;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
@@ -15,12 +14,10 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.mysimracing.AjustesCampeonatoActivity;
 import com.example.mysimracing.Clases.Circuitos;
 import com.example.mysimracing.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -34,8 +31,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

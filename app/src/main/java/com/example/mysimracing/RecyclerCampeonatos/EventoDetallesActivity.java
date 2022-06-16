@@ -1,6 +1,5 @@
-package com.example.mysimracing.RecicledListas;
+package com.example.mysimracing.RecyclerCampeonatos;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -9,20 +8,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.mysimracing.AjustesCampeonatoActivity;
-import com.example.mysimracing.NormativaActivity;
-import com.example.mysimracing.OrganizadorActivity;
 import com.example.mysimracing.R;
 import com.example.mysimracing.RecyclerCircuitos.CircuitoActivity;
 import com.example.mysimracing.RecyclerSanciones.ActivitySanciones;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import com.mikhaellopez.circularimageview.CircularImageView;
 
 public class EventoDetallesActivity extends AppCompatActivity {

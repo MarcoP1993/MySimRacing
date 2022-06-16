@@ -28,10 +28,10 @@
             android:exported="false"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
-            android:name=".InfoAppActivity"
+            android:name=".MenuOpciones.InfoAppActivity"
             android:exported="false" />
         <activity
-            android:name=".PerfilUsuarioActivity"
+            android:name=".MenuOpciones.PerfilUsuarioActivity"
             android:exported="false" />
         <activity
             android:name=".RecyclerSanciones.ActivityNuevaSancion"
@@ -41,39 +41,39 @@
             android:exported="false"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
-            android:name=".AjustesCampeonatoActivity"
+            android:name=".RecyclerCampeonatos.AjustesCampeonatoActivity"
             android:exported="false" />
         <activity
-            android:name=".RecicledListas.InscripcionesActivity"
+            android:name=".RecyclerCampeonatos.InscripcionesActivity"
             android:exported="false" />
         <activity
-            android:name=".NormativaActivity"
+            android:name=".RecyclerCampeonatos.NormativaActivity"
             android:exported="false" />
         <activity
-            android:name=".ActivityNuevoCampeonato"
+            android:name=".RecyclerCampeonatos.ActivityNuevoCampeonato"
             android:exported="false" />
         <activity
-            android:name=".OrganizadorActivity"
+            android:name=".Roles.OrganizadorActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.DayNight" />
         <activity
-            android:name=".ActivityPiloto"
+            android:name=".Roles.ActivityPiloto"
             android:exported="false" />
         <activity
-            android:name=".ActivityJefeEquipo"
+            android:name=".Roles.ActivityJefeEquipo"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.DayNight" />
         <activity
-            android:name=".RecicledListas.EventoDetallesActivity"
+            android:name=".RecyclerCampeonatos.EventoDetallesActivity"
             android:exported="false" />
         <activity
-            android:name=".RecuperarClaveActivity"
+            android:name=".Authentication.RecuperarClaveActivity"
             android:exported="true" />
         <activity
-            android:name=".RegistroActivity"
+            android:name=".Authentication.RegistroActivity"
             android:exported="true" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".Authentication.LoginActivity"
             android:exported="true"
             android:theme="@style/SplashTheme" >
             <intent-filter>

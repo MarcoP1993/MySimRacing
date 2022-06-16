@@ -1,4 +1,4 @@
-package com.example.mysimracing;
+package com.example.mysimracing.Roles;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,13 +10,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.mysimracing.Clases.Campeonatos;
-import com.example.mysimracing.RecicledListas.CampeonatosAdapter;
-import com.example.mysimracing.RecyclerEquipos.ActivityEquipos;
+import com.example.mysimracing.MenuOpciones.InfoAppActivity;
+import com.example.mysimracing.Authentication.LoginActivity;
+import com.example.mysimracing.MenuOpciones.PerfilUsuarioActivity;
+import com.example.mysimracing.R;
+import com.example.mysimracing.RecyclerCampeonatos.CampeonatosAdapter;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -26,19 +28,20 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.mikhaellopez.circularimageview.CircularImageView;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ActivityJefeEquipo extends AppCompatActivity{
+public class ActivityPiloto extends AppCompatActivity {
 
-    private Button btn_equipos;
-    private ArrayList<Campeonatos> campeonatos = new ArrayList<>();
-    private RecyclerView rv_campeonatos = null;
-    private CampeonatosAdapter adaptadorCampeonatos;
     private CircularImageView circularImageView;
-    private TextView nombreJefe;
-    String idnombre;
+    private String idpiloto;
+    private TextView txt_nom_piloto, txt_nick_piloto;
+    private RecyclerView rv_campeonato_piloto;
+    private CampeonatosAdapter campeonatosAdapter;
+    private ArrayList<Campeonatos> campeonatospiloto = null;
+
 
     SwipeRefreshLayout swipeActualizar;
 
@@ -48,41 +51,38 @@ public class ActivityJefeEquipo extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_jefe_equipo);
-        circularImageView = findViewById(R.id.img_perfil_jefe);
-        nombreJefe = findViewById(R.id.txt_nombreEquipo);
+        setContentView(R.layout.activity_piloto);
+        circularImageView = findViewById(R.id.img_perfil_piloto);
+        txt_nom_piloto = findViewById(R.id.txt_nom_piloto);
+        txt_nick_piloto = findViewById(R.id.txt_nick_piloto);
 
         mAuth = FirebaseAuth.getInstance();
         firestoredb = FirebaseFirestore.getInstance();
-        idnombre = mAuth.getCurrentUser().getUid();
+        idpiloto = mAuth.getCurrentUser().getUid();
 
-        datosusuario();
+        datosUsuario();
 
-        btn_equipos = findViewById(R.id.btn_equipos);
+        rv_campeonato_piloto = (RecyclerView) findViewById(R.id.rv_piloto_campeonato);
+        rv_campeonato_piloto.setLayoutManager(new LinearLayoutManager(this));
+        campeonatospiloto = new ArrayList<>();
 
-        rv_campeonatos = (RecyclerView) findViewById(R.id.rv_campeonatos_jefe);
-        rv_campeonatos.setLayoutManager(new LinearLayoutManager(this));
+        campeonatosAdapter = new CampeonatosAdapter(campeonatospiloto);
+        rv_campeonato_piloto.setAdapter(campeonatosAdapter);
 
-        adaptadorCampeonatos = new CampeonatosAdapter(campeonatos);
-        rv_campeonatos.setAdapter(adaptadorCampeonatos);
-
-
-        swipeActualizar = findViewById(R.id.swipeJefe);
+        swipeActualizar = findViewById(R.id.swipecamppiloto);
         swipeActualizar.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                campeonatos.clear();
+                campeonatospiloto.clear();
                 firestoredb.collection("Campeonatos").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                         List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
                         for (DocumentSnapshot camp:list) {
                             Campeonatos obj=camp.toObject(Campeonatos.class);
-                            obj.getId();
-                            campeonatos.add(obj);
-
+                            campeonatospiloto.add(obj);
                         }
-                        adaptadorCampeonatos.notifyDataSetChanged();
+                        campeonatosAdapter.notifyDataSetChanged();
                         swipeActualizar.setRefreshing(false);
 
                     }
@@ -96,30 +96,26 @@ public class ActivityJefeEquipo extends AppCompatActivity{
                 List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
                 for (DocumentSnapshot camp:list) {
                     Campeonatos obj=camp.toObject(Campeonatos.class);
-                    obj.getId();
-                    campeonatos.add(obj);
+                    campeonatospiloto.add(obj);
+
                 }
-                adaptadorCampeonatos.notifyDataSetChanged();
-                swipeActualizar.setRefreshing(false);
+                campeonatosAdapter.notifyDataSetChanged();
+                //swipeActualizar.setRefreshing(false);
 
             }
         });
 
 
-        btn_equipos.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ActivityJefeEquipo.this, ActivityEquipos.class));
-            }
-        });
     }
 
-    private void datosusuario() {
-        DocumentReference docRef = firestoredb.collection("Usuarios").document(idnombre);
+    private void datosUsuario() {
+        DocumentReference docRef = firestoredb.collection("Usuarios").document(idpiloto);
         docRef.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot , @Nullable FirebaseFirestoreException error) {
-                nombreJefe.setText("Nombre: " + documentSnapshot.getString("nombre"));
+                txt_nom_piloto.setText("Nombre: " + documentSnapshot.getString("nombre"));
+                txt_nick_piloto.setText("Nick: " + documentSnapshot.getString("nickname"));
+                Picasso.get().load(documentSnapshot.getString("fotoUsuario")).into(circularImageView);
 
             }
         });
@@ -134,20 +130,17 @@ public class ActivityJefeEquipo extends AppCompatActivity{
         int id = item.getItemId();
 
         if(id == R.id.perfil_menu){
-            startActivity(new Intent(ActivityJefeEquipo.this, PerfilUsuarioActivity.class));
+            startActivity(new Intent(ActivityPiloto.this, PerfilUsuarioActivity.class));
 
         }else if (id == R.id.info_menu){
-            startActivity(new Intent(ActivityJefeEquipo.this, InfoAppActivity.class));
+            startActivity(new Intent(ActivityPiloto.this, InfoAppActivity.class));
 
         }else if (id == R.id.cerrar_sesion){
             FirebaseAuth.getInstance().signOut();
-            startActivity(new Intent(ActivityJefeEquipo.this, LoginActivity.class));
+            startActivity(new Intent(ActivityPiloto.this, LoginActivity.class));
             finish();
         }
 
         return super.onOptionsItemSelected(item);
     }
-
-
-
 }

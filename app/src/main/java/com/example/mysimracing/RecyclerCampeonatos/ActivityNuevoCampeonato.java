@@ -1,4 +1,4 @@
-package com.example.mysimracing;
+package com.example.mysimracing.RecyclerCampeonatos;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,17 +12,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mysimracing.Clases.Campeonatos;
-import com.google.android.gms.tasks.OnCompleteListener;
+import com.example.mysimracing.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.UUID;
 
 public class ActivityNuevoCampeonato extends AppCompatActivity {
 
