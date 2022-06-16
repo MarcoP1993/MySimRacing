@@ -189,9 +189,7 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
     public void elegirfoto(View view) {
                 Intent pickIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(pickIntent, 100);
-                /*Intent chooserIntent = Intent.createChooser(getIntent(), "Selecciona una imagen");
-                chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[] {pickIntent});
-                startActivityForResult(chooserIntent, GALLERY_CODE);*/
+
 
 
     }
@@ -230,37 +228,4 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
         });
     }
 
-    /*private void cargarFoto(Bitmap bitmap) {
-
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        StorageReference reference = FirebaseStorage.getInstance().getReference()
-                .child("ImagenesPerfil").child(idUsuario + ".jpg");
-
-        reference.putBytes(baos.toByteArray()).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                descargarImagen(reference);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-
-            }
-        });
-
-    }
-
-    private void descargarImagen(StorageReference reference){
-        reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                recuperarImagenUsuario(uri);
-            }
-        });
-
-    }*/
-
-
-    //creamos el metodo actualizar perfil usuario
 }
