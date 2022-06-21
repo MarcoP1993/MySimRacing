@@ -123,15 +123,6 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    /*@Override
-    protected void onStart() {
-        super.onStart();
-
-        if(firebaseAuth.getCurrentUser() !=null){
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
-            finish();
-        }
-    }*/
 
     @Override
     public void onStart() {

@@ -4,9 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,10 +17,15 @@ import android.widget.Toast;
 
 import com.example.mysimracing.Authentication.LoginActivity;
 import com.example.mysimracing.Clases.Campeonatos;
+import com.example.mysimracing.ClasificacionActivity;
 import com.example.mysimracing.MenuOpciones.PerfilUsuarioActivity;
 import com.example.mysimracing.R;
 import com.example.mysimracing.RecyclerCircuitos.CircuitoActivity;
 import com.example.mysimracing.RecyclerSanciones.ActivitySanciones;
+import com.example.mysimracing.Roles.ActivityJefeEquipo;
+import com.example.mysimracing.Roles.ActivityPiloto;
+import com.example.mysimracing.Roles.OrganizadorActivity;
+import com.example.mysimracing.SalasActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -29,7 +36,10 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.mikhaellopez.circularimageview.CircularImageView;
+import com.squareup.picasso.Picasso;
 
 public class EventoDetallesActivity extends AppCompatActivity {
 
@@ -47,9 +57,10 @@ public class EventoDetallesActivity extends AppCompatActivity {
 
     FirebaseFirestore firestoredb;
     FirebaseAuth mAuth;
+    StorageReference reference;
     String nombreCamp;
     private String idUsuario;
-
+    private Uri imagenUrl;
 
 
     @Override
@@ -100,6 +111,13 @@ public class EventoDetallesActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(EventoDetallesActivity.this, InscripcionesActivity.class));
+            }
+        });
+
+        btn_clasificacion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(EventoDetallesActivity.this, ClasificacionActivity.class));
             }
         });
 
@@ -158,8 +176,47 @@ public class EventoDetallesActivity extends AppCompatActivity {
             }
         });
 
+        btn_salas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(EventoDetallesActivity.this, SalasActivity.class));
+            }
+        });
 
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(FirebaseAuth.getInstance().getCurrentUser() !=null) {
+            DocumentReference docRef = FirebaseFirestore.getInstance().collection("Usuarios")
+                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid());
+            docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    if (documentSnapshot.getString("role").equals("Organizador")) {
+                        btn_eliminar.setVisibility(View.VISIBLE);
+
+                    } if (documentSnapshot.getString("role").equals("Jefe de Equipo")) {
+                        btn_eliminar.setVisibility(View.INVISIBLE);
+                    }
+                    if (documentSnapshot.getString("role").equals("Piloto")) {
+                        btn_eliminar.setVisibility(View.INVISIBLE);
+                    }
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+
+                }
+            });
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
 }
+

@@ -77,7 +77,7 @@
         android:fontFamily="@font/audiowide"
         android:text="@string/txt_mi_perfil"
         android:textColor="@color/black"
-        android:textSize="24sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.48"
@@ -135,7 +135,7 @@
         android:id="@+id/btn_act_perfil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="12dp"
         android:fontFamily="@font/audiowide"
         android:text="@string/btn_actualizar_perfil"
         android:textSize="12sp"
@@ -147,7 +147,7 @@
         android:id="@+id/img_perfil"
         android:layout_width="146dp"
         android:layout_height="164dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:onClick="elegirfoto"
         app:civ_border_color="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
@@ -201,5 +201,18 @@
         app:layout_constraintStart_toStartOf="@+id/btn_act_perfil"
         app:layout_constraintTop_toBottomOf="@+id/btn_act_perfil"
         app:layout_constraintVertical_bias="0.282" />
+
+    <TextView
+        android:id="@+id/textView39"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:text="Pulsa la imagen para cambiarla"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/divider10"
+        app:layout_constraintStart_toStartOf="@+id/divider10"
+        app:layout_constraintTop_toBottomOf="@+id/divider10" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

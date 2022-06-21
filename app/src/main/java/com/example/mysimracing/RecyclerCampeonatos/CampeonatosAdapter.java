@@ -40,14 +40,14 @@ public class CampeonatosAdapter extends RecyclerView.Adapter<CampeonatosAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final MyViewHolder holder, @SuppressLint("RecyclerView") final int position) {
+    public void onBindViewHolder(@NonNull final MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
-        holder.txt_competicion.setText("Nombre Campeonato: " + listaCampeonatos.get(position).getNombreCampeonato());
-        holder.txt_juego.setText("Videojuego: " + listaCampeonatos.get(position).getJuego());
-        holder.txt_plataforma.setText("Plataforma: " + listaCampeonatos.get(position).getPlataforma());
-        holder.txt_fechas.setText("Fecha Campeonato: " + listaCampeonatos.get(position).getRango_fechas());
-        //Glide.with(context).load(listaCampeonatos.get(position).getImagen()).into(holder.imagen);
-        Picasso.get().load(listaCampeonatos.get(position).getImagen()).resize(150,150).into(holder.imagen);
+        Campeonatos camp_actual = listaCampeonatos.get(position);
+        holder.txt_competicion.setText("Nombre Campeonato: " + camp_actual.getNombreCampeonato());
+        holder.txt_juego.setText("Videojuego: " + camp_actual.getJuego());
+        holder.txt_plataforma.setText("Plataforma: " + camp_actual.getPlataforma());
+        holder.txt_fechas.setText("Fecha Campeonato: " + camp_actual.getRango_fechas());
+        Picasso.get().load(camp_actual.getImagen()).resize(150,150).into(holder.imagen);
 
         holder.txt_competicion.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,6 +62,7 @@ public class CampeonatosAdapter extends RecyclerView.Adapter<CampeonatosAdapter.
                 v.setOnClickListener(this);
             }
         });
+
     }
 
     @Override

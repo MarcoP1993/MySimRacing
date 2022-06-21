@@ -24,6 +24,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -99,30 +100,36 @@ public class CircuitoActivity extends AppCompatActivity {
 
     }
 
-    /*private void ListaCircuitos() {
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(FirebaseAuth.getInstance().getCurrentUser() !=null) {
+            DocumentReference docRef = FirebaseFirestore.getInstance().collection("Usuarios")
+                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid());
+            docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    if (documentSnapshot.getString("role").equals("Organizador")) {
+                        btn_nuevo_circuito.setVisibility(View.VISIBLE);
 
-        firestore.collection("Circuitos").addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-
-                if(error !=null){
-
-                    Log.e("Firestore Error", error.getMessage());
-                    return;
-                }
-
-                for (DocumentChange dc : value.getDocumentChanges()){
-
-                    if (dc.getType() == DocumentChange.Type.ADDED){
-
-                        listaCircuitos.add(dc.getDocument().toObject(Circuitos.class));
+                    } if (documentSnapshot.getString("role").equals("Jefe de Equipo")) {
+                        btn_nuevo_circuito.setVisibility(View.INVISIBLE);
                     }
-                    circuitosAdapter.notifyDataSetChanged();
+                    if (documentSnapshot.getString("role").equals("Piloto")) {
+                        btn_nuevo_circuito.setVisibility(View.INVISIBLE);
+                    }
                 }
-            }
-        });
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
 
-    }*/
+                }
+            });
+        }
+    }
 
-
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
 }

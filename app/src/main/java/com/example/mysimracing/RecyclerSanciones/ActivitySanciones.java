@@ -1,5 +1,6 @@
 package com.example.mysimracing.RecyclerSanciones;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,7 +15,12 @@ import android.widget.Button;
 
 import com.example.mysimracing.Clases.Sanciones;
 import com.example.mysimracing.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -68,7 +74,29 @@ public class ActivitySanciones extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-       
+        if(FirebaseAuth.getInstance().getCurrentUser() !=null) {
+            DocumentReference docRef = FirebaseFirestore.getInstance().collection("Usuarios")
+                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid());
+            docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    if (documentSnapshot.getString("role").equals("Organizador")) {
+                        btn_crearSancion.setVisibility(View.VISIBLE);
+
+                    } if (documentSnapshot.getString("role").equals("Jefe de Equipo")) {
+                        btn_crearSancion.setVisibility(View.INVISIBLE);
+                    }
+                    if (documentSnapshot.getString("role").equals("Piloto")) {
+                        btn_crearSancion.setVisibility(View.INVISIBLE);
+                    }
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+
+                }
+            });
+        }
     }
 
     @Override

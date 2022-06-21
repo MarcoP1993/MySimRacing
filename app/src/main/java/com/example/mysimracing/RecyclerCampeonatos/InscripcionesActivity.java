@@ -18,7 +18,9 @@ import com.example.mysimracing.R;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
@@ -125,7 +127,29 @@ public class InscripcionesActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         ins_adapter.startListening();
+        if(FirebaseAuth.getInstance().getCurrentUser() !=null) {
+            DocumentReference docRef = FirebaseFirestore.getInstance().collection("Usuarios")
+                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid());
+            docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    if (documentSnapshot.getString("role").equals("Organizador")) {
+                        btn_inscripcion.setVisibility(View.INVISIBLE);
 
+                    } if (documentSnapshot.getString("role").equals("Jefe de Equipo")) {
+                        btn_inscripcion.setVisibility(View.VISIBLE);
+                    }
+                    if (documentSnapshot.getString("role").equals("Piloto")) {
+                        btn_inscripcion.setVisibility(View.VISIBLE);
+                    }
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+
+                }
+            });
+        }
 
     }
 
